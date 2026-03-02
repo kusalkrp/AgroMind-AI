@@ -16,13 +16,10 @@ from dataclasses import dataclass
 from enum import Enum
 from typing import Optional
 
-import google.generativeai as genai
 from loguru import logger
 from tenacity import retry, stop_after_attempt, wait_exponential
 
 from config.settings import settings
-
-genai.configure(api_key=settings.gemini_api_key)
 
 RELEVANCE_THRESHOLD = 0.5  # chunks below this score are discarded
 
@@ -63,14 +60,25 @@ def _extract_json(text: str) -> dict:
     return json.loads(clean)
 
 
+def _get_genai_client():
+    from google import genai
+    from google.genai import types  # noqa: F401 — imported for use in callers
+    return genai.Client(api_key=settings.gemini_api_key), types
+
+
 @retry(
     stop=stop_after_attempt(2),
     wait=wait_exponential(multiplier=2, min=1, max=10),
     reraise=False,
 )
-def _grade_single(model, query: str, chunk: str) -> GradedChunk:
+def _grade_single(query: str, chunk: str) -> GradedChunk:
+    client, types = _get_genai_client()
     prompt = GRADER_PROMPT.format(query=query, chunk=chunk[:600])
-    response = model.generate_content(prompt)
+    response = client.models.generate_content(
+        model=settings.gemini_model,
+        contents=prompt,
+        config=types.GenerateContentConfig(temperature=0.1),
+    )
     data = _extract_json(response.text.strip())
 
     relevance_str = data.get("relevance", "partial")
@@ -101,12 +109,11 @@ def grade_chunks(query: str, chunks: list[str]) -> list[GradedChunk]:
     if not chunks:
         return []
 
-    model = genai.GenerativeModel(settings.gemini_model)
     graded: list[GradedChunk] = []
 
     for chunk in chunks:
         try:
-            result = _grade_single(model, query, chunk)
+            result = _grade_single(query, chunk)
             graded.append(result)
             logger.debug(
                 f"CRAG grade: {result.relevance.value} "

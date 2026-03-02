@@ -1,8 +1,11 @@
 # ── LLM ─────────────────────────────────────────────────────────────────────
-google-generativeai  # version resolved by llama-index-embeddings-google
+google-generativeai  # version resolved by llama-index-embeddings-google (old SDK kept for llama-index)
+google-genai>=1.0.0  # new unified SDK — used by our embedder, tagger, and langchain-google-genai
 
 # ── RAG / Vector ─────────────────────────────────────────────────────────────
-qdrant-client>=1.9.0
+qdrant-client==1.17.0
+grpcio==1.62.3       # pin: grpcio 1.67+ breaks qdrant-client EnumTypeWrapper | None annotations
+grpcio-status==1.62.3
 llama-index>=0.10.0
 llama-index-embeddings-google>=0.1.0
 llama-index-llms-gemini>=0.1.0

@@ -13,8 +13,9 @@ class Settings(BaseSettings):
 
     # ── Google Gemini ──────────────────────────────────────────────────────
     gemini_api_key: str = Field(..., description="Google Gemini API key")
-    gemini_model: str = "gemini-1.5-flash"
-    embedding_model: str = "models/text-embedding-004"
+    gemini_model: str = "gemini-2.5-flash"
+    embedding_model: str = "models/gemini-embedding-001"
+    embedding_dim: int = 3072  # gemini-embedding-001 output dimension
 
     # ── Qdrant ────────────────────────────────────────────────────────────
     qdrant_host: str = "localhost"

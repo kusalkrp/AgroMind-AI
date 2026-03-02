@@ -30,8 +30,8 @@ def get_district_context(district_name: str) -> dict:
             d.agro_zone,
             d.rainfall_zone,
             d.annual_rainfall_mm,
-            ST_Y(d.geom) AS lat,
-            ST_X(d.geom) AS lon
+            d.lat,
+            d.lon
         FROM districts d
         WHERE LOWER(d.name) = LOWER(%s)
         LIMIT 1
@@ -99,36 +99,56 @@ def get_nearby_districts(
     radius_km: float = 50.0,
 ) -> list[dict]:
     """
-    Find districts within radius_km of the given district using PostGIS ST_DWithin.
-    Useful for broadening market price and weather lookups.
+    Find districts within radius_km of the given district.
+    Uses Haversine approximation on lat/lon columns.
     """
+    # First get the source district coordinates
+    source = get_district_context(district_name)
+    if not source or "lat" not in source or source.get("lat") is None:
+        return []
+
+    src_lat = float(source["lat"])
+    src_lon = float(source["lon"])
+    # Approx 1 degree lat ≈ 111 km; use bounding box then sort
+    deg_radius = radius_km / 111.0
+
     sql = """
         SELECT
-            target.name,
-            target.agro_zone,
-            ROUND(
-                ST_Distance(
-                    source.geom::geography,
-                    target.geom::geography
-                ) / 1000
-            ) AS distance_km
-        FROM districts source
-        JOIN districts target
-          ON target.name != source.name
-         AND ST_DWithin(source.geom::geography, target.geom::geography, %s * 1000)
-        WHERE LOWER(source.name) = LOWER(%s)
-        ORDER BY distance_km ASC
-        LIMIT 5
+            name,
+            agro_zone,
+            lat,
+            lon
+        FROM districts
+        WHERE LOWER(name) != LOWER(%s)
+          AND lat BETWEEN %s AND %s
+          AND lon BETWEEN %s AND %s
+        LIMIT 10
     """
 
     try:
         conn = _get_conn()
         with conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cur:
-            cur.execute(sql, (radius_km, district_name))
+            cur.execute(sql, (
+                district_name,
+                src_lat - deg_radius, src_lat + deg_radius,
+                src_lon - deg_radius, src_lon + deg_radius,
+            ))
             rows = cur.fetchall()
         conn.close()
     except Exception as exc:
         logger.error(f"geo_retriever: nearby districts query failed: {exc}")
         return []
 
-    return [dict(r) for r in rows]
+    import math
+    results = []
+    for row in rows:
+        if row["lat"] is None or row["lon"] is None:
+            continue
+        dlat = math.radians(float(row["lat"]) - src_lat)
+        dlon = math.radians(float(row["lon"]) - src_lon)
+        a = math.sin(dlat / 2) ** 2 + math.cos(math.radians(src_lat)) * math.cos(math.radians(float(row["lat"]))) * math.sin(dlon / 2) ** 2
+        dist_km = round(6371 * 2 * math.asin(math.sqrt(a)), 1)
+        if dist_km <= radius_km:
+            results.append({"name": row["name"], "agro_zone": row["agro_zone"], "distance_km": dist_km})
+
+    return sorted(results, key=lambda x: x["distance_km"])[:5]

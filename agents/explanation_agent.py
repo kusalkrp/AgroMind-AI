@@ -8,14 +8,12 @@ from __future__ import annotations
 
 import json
 
-import google.generativeai as genai
 from loguru import logger
 
+from config.gemini import call_gemini
 from config.settings import settings
 from knowledge.cag import cache_response
 from orchestration.state import AgentState
-
-genai.configure(api_key=settings.gemini_api_key)
 
 EXPLAIN_PROMPT = """You are AgroMind, a friendly and knowledgeable agricultural advisor for Sri Lankan farmers.
 
@@ -85,10 +83,8 @@ def explanation_node(state: AgentState) -> AgentState:
         {"name": p.get("name"), "benefit": p.get("benefit")} for p in policy_list[:3]
     ]
 
-    model = genai.GenerativeModel(settings.gemini_model)
-
     try:
-        response = model.generate_content(
+        final_answer = call_gemini(
             EXPLAIN_PROMPT.format(
                 language=language,
                 query=query,
@@ -100,9 +96,9 @@ def explanation_node(state: AgentState) -> AgentState:
                 policy=json.dumps(policy_summary),
                 violations=json.dumps(violations),
                 confidence=round(confidence * 100, 1),
-            )
-        )
-        final_answer = response.text.strip()
+            ),
+            temperature=0.4,  # slightly higher for natural language output
+        ).strip()
     except Exception as exc:
         logger.error(f"explanation_node: LLM call failed: {exc}")
         final_answer = (

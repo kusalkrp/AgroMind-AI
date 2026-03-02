@@ -7,14 +7,12 @@ from __future__ import annotations
 import json
 import re
 
-import google.generativeai as genai
 from loguru import logger
 
+from config.gemini import call_gemini
 from config.settings import settings
 from knowledge.retrievers.temporal_retriever import get_weather_risk_context
 from orchestration.state import AgentState
-
-genai.configure(api_key=settings.gemini_api_key)
 
 RISK_PROMPT = """You are an expert agricultural risk analyst for Sri Lanka.
 
@@ -65,10 +63,9 @@ def risk_node(state: AgentState) -> AgentState:
 
     # ── LLM risk assessment ──────────────────────────────────────────────────
     semantic_ctx = "\n---\n".join(state.get("semantic_context", [])[:5])
-    model = genai.GenerativeModel(settings.gemini_model)
 
     try:
-        response = model.generate_content(
+        raw = call_gemini(
             RISK_PROMPT.format(
                 crop=crop,
                 district=district,
@@ -77,7 +74,7 @@ def risk_node(state: AgentState) -> AgentState:
                 semantic_context=semantic_ctx or "No knowledge base context available.",
             )
         )
-        data = _extract_json(response.text.strip())
+        data = _extract_json(raw.strip())
     except Exception as exc:
         logger.error(f"risk_node: LLM call failed: {exc}")
         data = {

@@ -64,16 +64,20 @@ def _extract_json(text: str) -> dict:
 )
 def _call_gemini(text: str, prompt_config: dict) -> dict:
     """Call Gemini API with the metadata extraction prompt."""
-    import google.generativeai as genai  # type: ignore
+    from google import genai
+    from google.genai import types
 
-    genai.configure(api_key=settings.gemini_api_key)
-    model = genai.GenerativeModel(
-        model_name=settings.gemini_model,
-        system_instruction=prompt_config["system"],
-    )
-
+    client = genai.Client(api_key=settings.gemini_api_key)
     user_msg = prompt_config["user_template"].format(text=text[:4000])  # cap at 4k chars
-    response = model.generate_content(user_msg)
+
+    response = client.models.generate_content(
+        model=settings.gemini_model,
+        contents=user_msg,
+        config=types.GenerateContentConfig(
+            system_instruction=prompt_config["system"],
+            temperature=0.1,
+        ),
+    )
     return _extract_json(response.text)
 
 

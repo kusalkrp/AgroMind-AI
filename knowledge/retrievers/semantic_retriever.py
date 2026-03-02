@@ -20,11 +20,12 @@ from qdrant_client.models import (
     Distance,
     FieldCondition,
     Filter,
-    HybridFusion,
+    Fusion,
+    FusionQuery,
     MatchAny,
     MatchValue,
     PointStruct,
-    RRFParams,
+    Prefetch,
     SparseIndexParams,
     SparseVector,
     SparseVectorParams,
@@ -35,7 +36,7 @@ from config.settings import settings
 from knowledge.embedder import embed_query, embed_text
 
 COLLECTION_NAME = settings.qdrant_collection
-DENSE_DIM = 768
+DENSE_DIM = settings.embedding_dim  # 3072 for gemini-embedding-001
 SPARSE_INDEX_SIZE = 30_000  # hash-trick vocabulary size
 
 _client: QdrantClient | None = None
@@ -52,7 +53,11 @@ _STOP_WORDS = frozenset(
 def get_client() -> QdrantClient:
     global _client
     if _client is None:
-        _client = QdrantClient(host=settings.qdrant_host, port=settings.qdrant_port)
+        _client = QdrantClient(
+            host=settings.qdrant_host,
+            port=settings.qdrant_port,
+            check_compatibility=False,
+        )
     return _client
 
 
@@ -179,15 +184,15 @@ def hybrid_search(
     qdrant_filter = build_filter(filters)
 
     prefetch = [
-        {"query": dense_vector, "using": "dense", "limit": top_k * 2},
-        {"query": sparse_vector, "using": "sparse", "limit": top_k * 2},
+        Prefetch(query=dense_vector, using="dense", limit=top_k * 2),
+        Prefetch(query=sparse_vector, using="sparse", limit=top_k * 2),
     ]
 
     try:
         results = client.query_points(
             collection_name=COLLECTION_NAME,
             prefetch=prefetch,
-            query=HybridFusion(RRFParams(rank_constant=60)),
+            query=FusionQuery(fusion=Fusion.RRF),
             limit=top_k,
             query_filter=qdrant_filter,
             with_payload=True,

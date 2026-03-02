@@ -9,16 +9,14 @@ from __future__ import annotations
 import json
 import re
 
-import google.generativeai as genai
 from loguru import logger
 
+from config.gemini import call_gemini
 from config.settings import settings
 from knowledge.crag import filter_relevant_chunks, get_overall_grade, grade_chunks
 from knowledge.reranker import rerank_texts
 from knowledge.retrievers.semantic_retriever import hybrid_search
 from orchestration.state import AgentState
-
-genai.configure(api_key=settings.gemini_api_key)
 
 INTENT_PROMPT = """You are an agricultural query classifier for Sri Lanka.
 
@@ -60,10 +58,9 @@ def intent_node(state: AgentState) -> AgentState:
     trace = state.get("reasoning_trace", [])
 
     # ── Step 1: Intent classification ────────────────────────────────────────
-    model = genai.GenerativeModel(settings.gemini_model)
     try:
-        response = model.generate_content(INTENT_PROMPT.format(query=query))
-        data = _extract_json(response.text.strip())
+        raw = call_gemini(INTENT_PROMPT.format(query=query))
+        data = _extract_json(raw.strip())
     except Exception as exc:
         logger.error(f"intent_node: classification failed: {exc}")
         data = {"intent": "general", "crop": None, "district": None,

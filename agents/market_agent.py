@@ -7,14 +7,12 @@ from __future__ import annotations
 import json
 import re
 
-import google.generativeai as genai
 from loguru import logger
 
+from config.gemini import call_gemini
 from config.settings import settings
 from knowledge.retrievers.temporal_retriever import get_market_price_context
 from orchestration.state import AgentState
-
-genai.configure(api_key=settings.gemini_api_key)
 
 MARKET_PROMPT = """You are an agricultural market analyst for Sri Lanka.
 
@@ -60,10 +58,9 @@ def market_node(state: AgentState) -> AgentState:
     price_ctx = get_market_price_context(commodity=crop, district=district, weeks=8)
 
     semantic_ctx = "\n---\n".join(state.get("semantic_context", [])[:5])
-    model = genai.GenerativeModel(settings.gemini_model)
 
     try:
-        response = model.generate_content(
+        raw = call_gemini(
             MARKET_PROMPT.format(
                 query=query,
                 commodity=crop,
@@ -72,7 +69,7 @@ def market_node(state: AgentState) -> AgentState:
                 semantic_context=semantic_ctx or "No market reports available.",
             )
         )
-        data = _extract_json(response.text.strip())
+        data = _extract_json(raw.strip())
     except Exception as exc:
         logger.error(f"market_node: LLM call failed: {exc}")
         data = {

@@ -7,13 +7,11 @@ from __future__ import annotations
 import json
 import re
 
-import google.generativeai as genai
 from loguru import logger
 
+from config.gemini import call_gemini
 from config.settings import settings
 from orchestration.state import AgentState
-
-genai.configure(api_key=settings.gemini_api_key)
 
 POLICY_PROMPT = """You are an agricultural policy expert for Sri Lanka.
 
@@ -74,10 +72,8 @@ def policy_node(state: AgentState) -> AgentState:
         state["reasoning_trace"] = trace
         return state
 
-    model = genai.GenerativeModel(settings.gemini_model)
-
     try:
-        response = model.generate_content(
+        raw = call_gemini(
             POLICY_PROMPT.format(
                 query=query,
                 crop=crop or "general",
@@ -85,7 +81,7 @@ def policy_node(state: AgentState) -> AgentState:
                 semantic_context=semantic_ctx,
             )
         )
-        data = _extract_json(response.text.strip())
+        data = _extract_json(raw.strip())
     except Exception as exc:
         logger.error(f"policy_node: LLM call failed: {exc}")
         data = {

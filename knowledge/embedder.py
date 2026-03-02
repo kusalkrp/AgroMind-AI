@@ -1,22 +1,31 @@
 """
-Gemini text-embedding-004 wrapper.
-Returns 768-dimensional dense vectors for queries and document chunks.
+Gemini gemini-embedding-001 wrapper.
+Returns 3072-dimensional dense vectors for queries and document chunks.
+
+Uses the new google-genai SDK (google.genai) which supports gemini-embedding-001.
 """
 from __future__ import annotations
 
 import time
-from typing import Union
 
-import google.generativeai as genai
+from google import genai
+from google.genai import types
 from loguru import logger
 from tenacity import retry, stop_after_attempt, wait_exponential
 
 from config.settings import settings
 
-genai.configure(api_key=settings.gemini_api_key)
+_client: genai.Client | None = None
 
-EMBED_DIM = 768
+EMBED_DIM = 3072
 _BATCH_DELAY_S = 0.1  # small pause between batches to avoid 429s
+
+
+def _get_client() -> genai.Client:
+    global _client
+    if _client is None:
+        _client = genai.Client(api_key=settings.gemini_api_key)
+    return _client
 
 
 @retry(
@@ -25,13 +34,14 @@ _BATCH_DELAY_S = 0.1  # small pause between batches to avoid 429s
     reraise=True,
 )
 def embed_text(text: str) -> list[float]:
-    """Embed a single text string. Returns a 768-d float list."""
-    result = genai.embed_content(
+    """Embed a single text string. Returns a 3072-d float list."""
+    client = _get_client()
+    result = client.models.embed_content(
         model=settings.embedding_model,
-        content=text,
-        task_type="retrieval_document",
+        contents=text,
+        config=types.EmbedContentConfig(task_type="RETRIEVAL_DOCUMENT"),
     )
-    return result["embedding"]
+    return list(result.embeddings[0].values)
 
 
 @retry(
@@ -42,14 +52,15 @@ def embed_text(text: str) -> list[float]:
 def embed_query(text: str) -> list[float]:
     """
     Embed a query string.
-    Uses task_type='retrieval_query' for asymmetric retrieval.
+    Uses task_type='RETRIEVAL_QUERY' for asymmetric retrieval.
     """
-    result = genai.embed_content(
+    client = _get_client()
+    result = client.models.embed_content(
         model=settings.embedding_model,
-        content=text,
-        task_type="retrieval_query",
+        contents=text,
+        config=types.EmbedContentConfig(task_type="RETRIEVAL_QUERY"),
     )
-    return result["embedding"]
+    return list(result.embeddings[0].values)
 
 
 def embed_batch(texts: list[str], batch_size: int = 20) -> list[list[float]]:
@@ -58,26 +69,23 @@ def embed_batch(texts: list[str], batch_size: int = 20) -> list[list[float]]:
 
     Args:
         texts: List of strings to embed.
-        batch_size: Number of texts per API call (Gemini supports up to 100).
+        batch_size: Number of texts per API call.
 
     Returns:
-        List of 768-d embedding vectors in the same order as input.
+        List of 3072-d embedding vectors in the same order as input.
     """
+    client = _get_client()
     all_embeddings: list[list[float]] = []
 
     for i in range(0, len(texts), batch_size):
         batch = texts[i : i + batch_size]
         try:
-            result = genai.embed_content(
+            result = client.models.embed_content(
                 model=settings.embedding_model,
-                content=batch,
-                task_type="retrieval_document",
+                contents=batch,
+                config=types.EmbedContentConfig(task_type="RETRIEVAL_DOCUMENT"),
             )
-            embeddings = result["embedding"]
-            # API returns a list of lists when given a list input
-            if isinstance(embeddings[0], float):
-                embeddings = [embeddings]
-            all_embeddings.extend(embeddings)
+            all_embeddings.extend([list(e.values) for e in result.embeddings])
             logger.debug(f"Embedded batch {i // batch_size + 1}: {len(batch)} texts")
         except Exception as exc:
             logger.error(f"Batch embed failed at index {i}: {exc}")

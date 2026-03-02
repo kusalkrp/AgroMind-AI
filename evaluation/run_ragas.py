@@ -58,10 +58,7 @@ def retrieve_with_strategy(strategy: ChunkStrategy, question: str) -> list[str]:
 
 def generate_answer(question: str, contexts: list[str]) -> str:
     """Generate an answer from context using Gemini (no agent pipeline)."""
-    import google.generativeai as genai
-
-    genai.configure(api_key=settings.gemini_api_key)
-    model = genai.GenerativeModel(settings.gemini_model)
+    from config.gemini import call_gemini
 
     context_str = "\n---\n".join(contexts)
     prompt = (
@@ -72,8 +69,7 @@ def generate_answer(question: str, contexts: list[str]) -> str:
     )
 
     try:
-        response = model.generate_content(prompt)
-        return response.text.strip()
+        return call_gemini(prompt).strip()
     except Exception as exc:
         logger.warning(f"generate_answer failed: {exc}")
         return "Unable to generate answer."

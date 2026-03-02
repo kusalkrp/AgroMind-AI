@@ -8,15 +8,13 @@ import json
 import re
 from pathlib import Path
 
-import google.generativeai as genai
 import yaml
 from loguru import logger
 
+from config.gemini import call_gemini
 from config.settings import settings
 from knowledge.retrievers.geo_retriever import get_district_context, get_soil_context
 from orchestration.state import AgentState
-
-genai.configure(api_key=settings.gemini_api_key)
 
 _CROPS_YAML: dict | None = None
 
@@ -80,10 +78,9 @@ def planner_node(state: AgentState) -> AgentState:
     crop_rules = _get_crop_rules().get(crop, {})
 
     semantic_ctx = "\n---\n".join(state.get("semantic_context", [])[:5])
-    model = genai.GenerativeModel(settings.gemini_model)
 
     try:
-        response = model.generate_content(
+        raw = call_gemini(
             PLANNER_PROMPT.format(
                 query=query,
                 crop=crop,
@@ -94,7 +91,7 @@ def planner_node(state: AgentState) -> AgentState:
                 semantic_context=semantic_ctx or "No knowledge base context available.",
             )
         )
-        data = _extract_json(response.text.strip())
+        data = _extract_json(raw.strip())
     except Exception as exc:
         logger.error(f"planner_node: LLM call failed: {exc}")
         data = {

@@ -12,9 +12,16 @@ _model = None
 def _get_model():
     global _model
     if _model is None:
-        from sentence_transformers import CrossEncoder  # type: ignore
-        _model = CrossEncoder("cross-encoder/ms-marco-MiniLM-L-6-v2")
-        logger.debug("CrossEncoder loaded: ms-marco-MiniLM-L-6-v2")
+        try:
+            from sentence_transformers import CrossEncoder  # type: ignore
+            _model = CrossEncoder("cross-encoder/ms-marco-MiniLM-L-6-v2")
+            logger.debug("CrossEncoder loaded: ms-marco-MiniLM-L-6-v2")
+        except ImportError:
+            logger.warning(
+                "sentence-transformers not installed — reranker disabled. "
+                "Install it to enable cross-encoder reranking."
+            )
+            _model = None
     return _model
 
 
@@ -38,13 +45,16 @@ def rerank(
         return []
 
     model = _get_model()
+    if model is None:
+        # Graceful degradation: return top_k chunks with uniform score
+        return [(c, 0.0) for c in chunks[:top_k]]
+
     pairs = [(query, chunk) for chunk in chunks]
 
     try:
         scores = model.predict(pairs).tolist()
     except Exception as exc:
         logger.error(f"reranker.predict failed: {exc}")
-        # Fallback: return chunks with uniform score
         return [(c, 0.0) for c in chunks[:top_k]]
 
     ranked = sorted(zip(chunks, scores), key=lambda x: x[1], reverse=True)
