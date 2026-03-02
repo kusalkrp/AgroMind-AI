@@ -9,17 +9,13 @@ import {
   ResponsiveContainer,
   ReferenceLine,
 } from "recharts";
+import "./Charts.css";
 
-/**
- * Build 4-week price data from current price + trend string.
- * Used when the LLM returns a text forecast instead of structured data.
- */
 function buildForecastData(currentPrice, trend) {
   const base = parseFloat(currentPrice) || 0;
   if (base === 0) return null;
 
-  const delta =
-    trend === "rising" ? 0.03 : trend === "falling" ? -0.03 : 0.01;
+  const delta = trend === "rising" ? 0.03 : trend === "falling" ? -0.03 : 0.01;
 
   return [1, 2, 3, 4].map((week) => ({
     week: `Wk ${week}`,
@@ -37,7 +33,6 @@ export default function MarketChart({ marketInsight }) {
     best_selling_time: bestTime,
   } = marketInsight;
 
-  // Prefer structured array; fall back to building from price+trend
   let data = null;
   if (Array.isArray(forecast) && forecast.length > 0 && forecast[0].price != null) {
     data = forecast.map((d, i) => ({ week: `Wk ${i + 1}`, price: d.price }));
@@ -45,68 +40,83 @@ export default function MarketChart({ marketInsight }) {
     data = buildForecastData(currentPrice, trend);
   }
 
-  const trendColor =
-    trend === "rising" ? "#16a34a" : trend === "falling" ? "#dc2626" : "#d97706";
+  const trendColor = trend === "rising" ? "#10b981" : trend === "falling" ? "#ef4444" : "#f59e0b";
+
+  const CustomTooltip = ({ active, payload, label }) => {
+    if (active && payload && payload.length) {
+      return (
+        <div className="custom-tooltip glass-panel-heavy">
+          <p className="tooltip-title">{label}</p>
+          <p className="tooltip-price" style={{ color: trendColor }}>
+            LKR {payload[0].value.toFixed(2)} / kg
+          </p>
+        </div>
+      );
+    }
+    return null;
+  };
 
   return (
-    <div className="mt-4 p-3 bg-white border border-gray-200 rounded-lg">
-      <div className="flex items-center justify-between mb-2">
-        <h3 className="text-sm font-semibold text-gray-700">Market Price Forecast</h3>
-        <div className="flex items-center gap-2 text-xs">
-          {currentPrice > 0 && (
-            <span className="font-semibold text-gray-800">
-              LKR {currentPrice}/kg
-            </span>
-          )}
-          {trend && (
-            <span
-              className="px-2 py-0.5 rounded-full capitalize font-medium"
-              style={{ background: `${trendColor}20`, color: trendColor }}
-            >
-              {trend}
-            </span>
-          )}
+    <div className="chart-container glass-panel">
+      <div className="chart-header">
+        <h3>Market Price Forecast</h3>
+        <div className="chart-meta">
+          {currentPrice > 0 && <span className="current-price badge">LKR {currentPrice}/kg 🏷️</span>}
+          {trend && <span className={`trend-badge badge ${trend}`}>{trend} {trend === 'rising' ? '↗' : trend === 'falling' ? '↘' : '→'}</span>}
         </div>
       </div>
 
       {data ? (
-        <ResponsiveContainer width="100%" height={160}>
-          <LineChart data={data} margin={{ top: 4, right: 16, left: -8, bottom: 0 }}>
-            <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-            <XAxis dataKey="week" tick={{ fontSize: 11 }} />
-            <YAxis tick={{ fontSize: 11 }} />
-            <Tooltip
-              formatter={(v) => [`LKR ${v}`, "Price"]}
-              contentStyle={{ fontSize: 12 }}
-            />
-            {currentPrice > 0 && (
-              <ReferenceLine
-                y={parseFloat(currentPrice)}
-                stroke="#94a3b8"
-                strokeDasharray="4 4"
-                label={{ value: "now", position: "insideTopRight", fontSize: 10, fill: "#94a3b8" }}
+        <div className="chart-wrapper">
+          <ResponsiveContainer width="100%" height={160}>
+            <LineChart data={data} margin={{ top: 10, right: 20, left: -20, bottom: 0 }}>
+              <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" vertical={false} />
+              <XAxis 
+                dataKey="week" 
+                tick={{ fill: "var(--text-muted)", fontSize: 11 }} 
+                axisLine={{ stroke: "rgba(255,255,255,0.1)" }}
+                tickLine={false}
               />
-            )}
-            <Line
-              type="monotone"
-              dataKey="price"
-              stroke={trendColor}
-              strokeWidth={2}
-              dot={{ r: 4, fill: trendColor }}
-              activeDot={{ r: 6 }}
-            />
-          </LineChart>
-        </ResponsiveContainer>
+              <YAxis 
+                tick={{ fill: "var(--text-muted)", fontSize: 11 }} 
+                axisLine={{ stroke: "rgba(255,255,255,0.1)" }}
+                tickLine={false}
+                domain={['auto', 'auto']}
+              />
+              <Tooltip content={<CustomTooltip />} cursor={{ fill: "transparent", stroke: "rgba(255,255,255,0.1)", strokeWidth: 1 }} />
+              
+              {currentPrice > 0 && (
+                <ReferenceLine
+                  y={parseFloat(currentPrice)}
+                  stroke="var(--text-muted)"
+                  strokeDasharray="4 4"
+                  label={{ value: "Current", position: "insideTopRight", fill: "var(--text-muted)", fontSize: 10 }}
+                />
+              )}
+              
+              <Line
+                type="monotone"
+                dataKey="price"
+                stroke={trendColor}
+                strokeWidth={3}
+                dot={{ r: 4, fill: "var(--bg-base)", stroke: trendColor, strokeWidth: 2 }}
+                activeDot={{ r: 6, fill: trendColor, stroke: "var(--bg-base)", strokeWidth: 2 }}
+                animationDuration={1500}
+              />
+            </LineChart>
+          </ResponsiveContainer>
+        </div>
       ) : (
         typeof forecast === "string" && forecast && (
-          <p className="text-xs text-gray-600">{forecast}</p>
+          <p className="fallback-text">{forecast}</p>
         )
       )}
 
       {bestTime && (
-        <p className="text-xs text-gray-500 mt-2">
-          <span className="font-medium">Best time to sell:</span> {bestTime}
-        </p>
+        <div className="chart-footer">
+          <span className="footer-label">Actionable Insight:</span> 
+          <span className="footer-value">{bestTime}</span>
+        </div>
       )}
     </div>
   );

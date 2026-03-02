@@ -2,6 +2,10 @@
 
 **Agentic RAG System for Sri Lankan Agricultural Intelligence**
 
+<div align="center">
+  <img src="assets/dashboard_preview.png" alt="AgroMind AI Dashboard Preview" width="100%">
+</div>
+
 AgroMind AI is a production-grade, multi-agent AI system designed to provide localized, multilingual agricultural intelligence to Sri Lankan farmers. Built entirely on open-source infrastructure (except for the highly cost-effective Google Gemini API), it processes natural language queries in English, Sinhala, and Tamil to answer questions about disease risks, crop planning, market prices, and government policies.
 
 ## 🌟 Key Features

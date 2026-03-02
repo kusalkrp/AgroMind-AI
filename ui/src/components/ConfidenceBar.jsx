@@ -1,34 +1,33 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import "./ConfidenceBar.css";
 
-/**
- * ConfidenceBar — progress bar showing confidence score.
- * Width = score * 100%. Color by risk level: green/yellow/red.
- */
 export default function ConfidenceBar({ score = 0, riskLevel = "low" }) {
+  const [animatedScore, setAnimatedScore] = useState(0);
   const pct = Math.round(score * 100);
 
-  const colorClass =
-    riskLevel === "high"
-      ? "bg-red-500"
-      : riskLevel === "medium"
-      ? "bg-yellow-400"
-      : "bg-green-500";
+  // Animate the bar filling up on mount
+  useEffect(() => {
+    const timer = setTimeout(() => setAnimatedScore(pct), 100);
+    return () => clearTimeout(timer);
+  }, [pct]);
 
   return (
-    <div className="mt-3">
-      <div className="flex justify-between text-xs text-gray-500 mb-1">
-        <span>Confidence</span>
-        <span>{pct}%</span>
+    <div className="confidence-container">
+      <div className="confidence-header">
+        <span className="confidence-label">AI Confidence</span>
+        <span className={`confidence-value ${riskLevel}`}>{animatedScore}%</span>
       </div>
-      <div className="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
-        <div
-          className={`h-3 rounded-full transition-all duration-500 ${colorClass}`}
-          style={{ width: `${pct}%` }}
+      
+      <div className="progress-track glass-panel">
+        <div 
+          className={`progress-fill ${riskLevel}`}
+          style={{ width: `${animatedScore}%` }}
         />
       </div>
-      <p className="text-xs mt-1 capitalize text-gray-500">
-        Risk level: <span className="font-semibold">{riskLevel}</span>
-      </p>
+      
+      <div className="risk-footer">
+        Assessed Risk Level: <span className={`risk-badge ${riskLevel}`}>{riskLevel}</span>
+      </div>
     </div>
   );
 }

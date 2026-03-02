@@ -1,9 +1,6 @@
 import React, { useState } from "react";
+import "./AgentTrace.css";
 
-/**
- * AgentTrace — numbered list of reasoning steps.
- * Collapsed to 3 steps by default; "Show all" toggle expands.
- */
 export default function AgentTrace({ trace = [] }) {
   const [expanded, setExpanded] = useState(false);
 
@@ -12,24 +9,27 @@ export default function AgentTrace({ trace = [] }) {
   const visible = expanded ? trace : trace.slice(0, 3);
 
   return (
-    <div className="mt-4 border border-gray-200 rounded-lg p-3 bg-gray-50">
-      <h3 className="text-sm font-semibold text-gray-700 mb-2">Agent Reasoning Trace</h3>
-      <ol className="space-y-1">
+    <div className="agent-trace-container glass-panel">
+      <div className="trace-header">
+        <span className="trace-icon">⚡</span>
+        <h3>Reasoning Trace</h3>
+      </div>
+      
+      <ol className="trace-list">
         {visible.map((step, i) => (
-          <li key={i} className="flex gap-2 text-xs text-gray-600">
-            <span className="flex-shrink-0 w-5 h-5 bg-green-100 text-green-700 rounded-full flex items-center justify-center font-bold text-[10px]">
-              {i + 1}
-            </span>
-            <span className="leading-relaxed">{step}</span>
+          <li key={i} className="trace-item animate-fade-in-up" style={{ animationDelay: `${i * 0.1}s` }}>
+            <span className="step-number">{i + 1}</span>
+            <span className="step-text">{step}</span>
           </li>
         ))}
       </ol>
+      
       {trace.length > 3 && (
         <button
-          onClick={() => setExpanded((e) => !e)}
-          className="mt-2 text-xs text-green-600 hover:underline"
+          onClick={() => setExpanded(!expanded)}
+          className="trace-toggle-btn"
         >
-          {expanded ? "Show less" : `Show all ${trace.length} steps`}
+          {expanded ? "Collapse steps" : `View all ${trace.length} steps`}
         </button>
       )}
     </div>

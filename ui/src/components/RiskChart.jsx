@@ -9,17 +9,16 @@ import {
   ResponsiveContainer,
   Cell,
 } from "recharts";
+import "./Charts.css";
 
 const SEVERITY_VALUE = { low: 1, medium: 2, high: 3 };
-const SEVERITY_COLOR = { low: "#16a34a", medium: "#d97706", high: "#dc2626" };
-const LEVEL_COLOR = { low: "text-green-600 bg-green-50", medium: "text-yellow-600 bg-yellow-50", high: "text-red-600 bg-red-50" };
+const SEVERITY_COLOR = { low: "#10b981", medium: "#f59e0b", high: "#ef4444" }; // Using the CSS variables functionally
 
 export default function RiskChart({ riskAssessment }) {
   if (!riskAssessment) return null;
 
   const { overall_risk_level, risk_factors = [], disease_threats = [], pest_threats = [] } = riskAssessment;
 
-  // Build bar chart data from risk_factors
   const chartData = risk_factors.slice(0, 6).map((f) => ({
     name: f.factor?.length > 16 ? f.factor.slice(0, 16) + "…" : f.factor,
     fullName: f.factor,
@@ -28,64 +27,70 @@ export default function RiskChart({ riskAssessment }) {
     mitigation: f.mitigation,
   }));
 
-  const levelClass = LEVEL_COLOR[overall_risk_level] || LEVEL_COLOR.low;
+  const CustomTooltip = ({ active, payload }) => {
+    if (active && payload && payload.length) {
+      const data = payload[0].payload;
+      return (
+        <div className="custom-tooltip glass-panel-heavy">
+          <p className="tooltip-title text-gradient">{data.fullName}</p>
+          <p className="tooltip-severity">Severity: <span className={`risk-badge ${data.severity}`}>{data.severity}</span></p>
+          {data.mitigation && <p className="tooltip-mitigation text-secondary text-xs mt-1">{data.mitigation}</p>}
+        </div>
+      );
+    }
+    return null;
+  };
 
   return (
-    <div className="mt-4 p-3 bg-white border border-gray-200 rounded-lg">
-      <div className="flex items-center gap-2 mb-2">
-        <h3 className="text-sm font-semibold text-gray-700">Risk Assessment</h3>
-        {overall_risk_level && (
-          <span className={`text-xs px-2 py-0.5 rounded-full font-semibold capitalize ${levelClass}`}>
-            {overall_risk_level} risk
-          </span>
-        )}
+    <div className="chart-container glass-panel">
+      <div className="chart-header">
+        <h3>Risk Factors Breakdown</h3>
       </div>
 
-      {/* Risk factors bar chart */}
       {chartData.length > 0 && (
-        <ResponsiveContainer width="100%" height={130}>
-          <BarChart
-            data={chartData}
-            layout="vertical"
-            margin={{ top: 0, right: 16, left: 8, bottom: 0 }}
-          >
-            <CartesianGrid strokeDasharray="3 3" horizontal={false} stroke="#f0f0f0" />
-            <XAxis
-              type="number"
-              domain={[0, 3]}
-              ticks={[1, 2, 3]}
-              tickFormatter={(v) => ["", "Low", "Med", "High"][v]}
-              tick={{ fontSize: 10 }}
-            />
-            <YAxis type="category" dataKey="name" tick={{ fontSize: 10 }} width={80} />
-            <Tooltip
-              formatter={(_, __, props) => [
-                props.payload.severity,
-                props.payload.fullName,
-              ]}
-              contentStyle={{ fontSize: 11 }}
-            />
-            <Bar dataKey="value" radius={[0, 3, 3, 0]}>
-              {chartData.map((entry, i) => (
-                <Cell key={i} fill={SEVERITY_COLOR[entry.severity] || "#94a3b8"} />
-              ))}
-            </Bar>
-          </BarChart>
-        </ResponsiveContainer>
+        <div className="chart-wrapper">
+          <ResponsiveContainer width="100%" height={160}>
+            <BarChart
+              data={chartData}
+              layout="vertical"
+              margin={{ top: 0, right: 16, left: 0, bottom: 0 }}
+            >
+              <CartesianGrid strokeDasharray="3 3" horizontal={false} stroke="rgba(255,255,255,0.05)" />
+              <XAxis
+                type="number"
+                domain={[0, 3]}
+                ticks={[1, 2, 3]}
+                tickFormatter={(v) => ["", "Low", "Med", "High"][v]}
+                tick={{ fill: "var(--text-muted)", fontSize: 11 }}
+                axisLine={{ stroke: "rgba(255,255,255,0.1)" }}
+                tickLine={false}
+              />
+              <YAxis 
+                type="category" 
+                dataKey="name" 
+                tick={{ fill: "var(--text-secondary)", fontSize: 11 }} 
+                width={85} 
+                axisLine={{ stroke: "rgba(255,255,255,0.1)" }}
+                tickLine={false}
+              />
+              <Tooltip cursor={{ fill: "rgba(255,255,255,0.05)" }} content={<CustomTooltip />} />
+              <Bar dataKey="value" radius={[0, 4, 4, 0]} barSize={16}>
+                {chartData.map((entry, i) => (
+                  <Cell key={i} fill={SEVERITY_COLOR[entry.severity]} />
+                ))}
+              </Bar>
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
       )}
 
-      {/* Threat tags */}
       {(disease_threats.length > 0 || pest_threats.length > 0) && (
-        <div className="mt-2 flex flex-wrap gap-1">
+        <div className="threat-tags-container">
           {disease_threats.slice(0, 3).map((t) => (
-            <span key={t} className="text-xs px-1.5 py-0.5 bg-red-50 text-red-600 rounded">
-              {t}
-            </span>
+            <span key={t} className="threat-tag disease">🦠 {t}</span>
           ))}
           {pest_threats.slice(0, 3).map((t) => (
-            <span key={t} className="text-xs px-1.5 py-0.5 bg-orange-50 text-orange-600 rounded">
-              {t}
-            </span>
+            <span key={t} className="threat-tag pest">🐛 {t}</span>
           ))}
         </div>
       )}

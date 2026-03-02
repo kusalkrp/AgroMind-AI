@@ -1,0 +1,146 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  /* Brand Colors - Deep Dark & Indigo */
+  --bg-deep: #000000; /* Pure black */
+  --bg-surface: rgba(24, 24, 27, 0.4); /* Glass UI Zinc 900 base */
+  --bg-surface-elevated: #18181b; /* Solid zinc 900 for tooltips/popups */
+  --bg-input: rgba(0, 0, 0, 0.5); /* Semi-transparent pure black */
+  
+  --accent-primary: #6366f1; /* Indigo */
+  --accent-secondary: #4f46e5;
+  --accent-blue: #3b82f6; /* Blue for stats/pills */
+  --accent-blue-bg: rgba(59, 130, 246, 0.15);
+  
+  --text-primary: #ffffff;
+  --text-secondary: #a1a1aa; /* Zinc 400 */
+  --text-muted: #52525b; /* Zinc 600 */
+  
+  --border-light: rgba(255, 255, 255, 0.08); /* Glass border */
+  --border-focus: #6366f1;
+  
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+
+  /* Risk Colors */
+  --risk-low: #10b981;
+  --risk-medium: #f59e0b;
+  --risk-high: #ef4444;
+  --transition-smooth: all 0.2s ease-in-out;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--bg-deep);
+  background-image: 
+    radial-gradient(circle at 15% 50%, rgba(99, 102, 241, 0.08), transparent 30%),
+    radial-gradient(circle at 85% 30%, rgba(59, 130, 246, 0.08), transparent 30%);
+  color: var(--text-primary);
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.card {
+  background: rgba(24, 24, 27, 0.25);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-light);
+  border-top: 1px solid rgba(255, 255, 255, 0.15); /* Glossy top edge */
+  border-radius: var(--radius-lg);
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+}
+
+/* Base input styling */
+.dark-input {
+  background: var(--bg-input);
+  border: 1px solid var(--border-light);
+  color: var(--text-primary);
+  border-radius: var(--radius-md);
+  padding: 0.75rem 1rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  width: 100%;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.dark-input:focus {
+  border-color: var(--border-focus);
+}
+
+.indigo-btn {
+  background: var(--accent-primary);
+  color: #fff;
+  border: none;
+  padding: 0.85rem 1rem;
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: background 0.2s;
+  width: 100%;
+  text-align: center;
+  font-size: 0.95rem;
+}
+.indigo-btn:hover:not(:disabled) {
+  background: var(--accent-secondary);
+}
+.indigo-btn:disabled {
+  background: var(--border-light);
+  color: var(--text-muted);
+  cursor: not-allowed;
+}
+
+.outline-btn {
+  background: transparent;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-light);
+  padding: 0.85rem 1rem;
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all 0.2s;
+  width: 100%;
+  text-align: center;
+}
+.outline-btn:hover {
+  background: rgba(255,255,255,0.05);
+  color: #fff;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #27272a;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #3f3f46;
+}
+
+/* Standard App Layout overrides */
+.glass-panel, .glass-panel-heavy {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  box-shadow: none;
+}

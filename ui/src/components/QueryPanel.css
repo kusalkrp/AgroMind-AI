@@ -1,0 +1,237 @@
+.query-panel-root {
+  display: flex;
+  flex-direction: column;
+}
+
+.config-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem;
+}
+
+@media (max-width: 1024px) {
+  .config-grid { grid-template-columns: 1fr; }
+}
+
+.mt-2rem {
+  margin-top: 2rem;
+}
+
+.card-title {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.card-header {
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.inline-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.header-icon {
+  color: var(--text-secondary);
+}
+
+.settings-form {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.form-group label {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.form-row {
+  display: flex;
+  gap: 1rem;
+}
+.half {
+  flex: 1;
+}
+
+.form-action {
+  margin-top: 0.5rem;
+}
+
+select.dark-input {
+  appearance: none;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23a1a1aa' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+}
+
+.summary-content {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.summary-stats {
+  margin-bottom: 1.5rem;
+}
+.stat-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--border-light);
+  font-size: 0.9rem;
+}
+.stat-row:last-of-type {
+  border-bottom: none;
+}
+.stat-label {
+  color: var(--text-secondary);
+}
+.stat-value {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+.highlight-row {
+  margin-top: 0.5rem;
+  padding-bottom: 0;
+}
+.blue-col {
+  color: var(--accent-blue);
+  font-weight: 500;
+}
+.blue-val {
+  color: var(--accent-blue);
+  font-size: 1.1rem;
+}
+
+.map-embed-wrapper {
+  flex: 1;
+  min-height: 400px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-light);
+  overflow: hidden;
+}
+
+/* Results List */
+.empty-results {
+  padding: 3rem;
+  text-align: center;
+  color: var(--text-muted);
+}
+
+.results-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.result-item {
+  border-bottom: 1px solid var(--border-light);
+  background: var(--bg-surface);
+  transition: background 0.2s;
+}
+.result-item:last-child {
+  border-bottom: none;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+}
+
+.result-row-top {
+  display: flex;
+  justify-content: space-between;
+  padding: 1.25rem 1.5rem;
+}
+
+.result-title-group h4 {
+  margin: 0 0 0.4rem 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+.result-meta {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.result-stats-group {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.result-time {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+.cost-pill {
+  background: var(--accent-blue-bg);
+  color: var(--accent-blue);
+  padding: 0.25rem 0.6rem;
+  border-radius: 4px;
+  font-weight: 700;
+  font-size: 0.8rem;
+}
+
+.result-content {
+  padding: 0 1.5rem 1.5rem 1.5rem;
+  /* subtle top line to separate question from answer */
+  background: rgba(0, 0, 0, 0.15);
+}
+
+.answer-text {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #e4e4e7; /* zinc-200 */
+  margin-bottom: 2rem;
+  margin-top: 1rem;
+}
+
+/* Markdown specific styling overrides */
+.markdown-body p {
+  margin-bottom: 1rem;
+}
+.markdown-body p:last-child {
+  margin-bottom: 0;
+}
+.markdown-body ul, .markdown-body ol {
+  margin-bottom: 1rem;
+  padding-left: 1.5rem;
+}
+.markdown-body li {
+  margin-bottom: 0.5rem;
+}
+.markdown-body strong {
+  color: #fff;
+  font-weight: 600;
+}
+
+.error-text {
+  color: var(--risk-high);
+  font-size: 0.9rem;
+  margin-top: 1rem;
+}
+
+.chart-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+@media (max-width: 768px) {
+  .chart-grid { grid-template-columns: 1fr; }
+}
+
+.citations-block {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px dashed var(--border-light);
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}

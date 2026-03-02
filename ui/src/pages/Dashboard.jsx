@@ -1,20 +1,11 @@
 import React, { useEffect, useState } from "react";
 import QueryPanel from "../components/QueryPanel.jsx";
-import DistrictMap from "../components/DistrictMap.jsx";
 import { getHealth } from "../api/client.js";
+import "./Dashboard.css"; 
 
-/**
- * Dashboard — two-column layout:
- *   Left  60%: QueryPanel (query form + results)
- *   Right 40%: DistrictMap (interactive Sri Lanka map)
- *
- * Nav bar shows title + live health dot (green=ok, red=degraded/down).
- */
 export default function Dashboard() {
-  const [healthStatus, setHealthStatus] = useState("unknown"); // ok | degraded | unknown
-  const [selectedDistrict, setSelectedDistrict] = useState("");
+  const [healthStatus, setHealthStatus] = useState("unknown");
 
-  // Poll health every 30 s
   useEffect(() => {
     let cancelled = false;
 
@@ -35,65 +26,39 @@ export default function Dashboard() {
     };
   }, []);
 
-  const dotColor =
-    healthStatus === "ok"
-      ? "bg-green-400"
-      : healthStatus === "degraded"
-      ? "bg-red-400"
-      : "bg-yellow-400";
-
   return (
-    <div className="flex flex-col h-screen">
-      {/* ── Nav bar ── */}
-      <nav className="bg-green-700 text-white px-6 py-3 flex items-center justify-between shadow">
-        <div className="flex items-center gap-3">
-          <span className="text-xl font-bold tracking-tight">AgroMind AI</span>
-          <span className="text-green-200 text-sm hidden sm:block">
-            Sri Lanka Agricultural Intelligence
-          </span>
+    <div className="dashboard-container">
+      {/* Top Nav */}
+      <nav className="top-nav">
+        <div className="nav-profile">
+          <div className="nav-avatar">A</div>
+          <div className="nav-info">
+            <span className="nav-name">Demo User</span>
+            <span className="nav-status">demo@example.com</span>
+          </div>
         </div>
-        <div className="flex items-center gap-2 text-sm">
-          <span
-            className={`w-3 h-3 rounded-full ${dotColor} shadow-sm`}
-            title={`API status: ${healthStatus}`}
-          />
-          <span className="text-green-100 capitalize">{healthStatus}</span>
-        </div>
+        <button className="nav-disconnect">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+          Disconnect
+        </button>
       </nav>
 
-      {/* ── Main content ── */}
-      <main className="flex flex-1 overflow-hidden">
-        {/* Left: Query panel (60%) */}
-        <section className="w-3/5 flex flex-col p-5 overflow-y-auto border-r border-gray-200 bg-white">
-          <h2 className="text-base font-semibold text-gray-700 mb-3">
-            Ask your agricultural question
-          </h2>
-          <QueryPanel
-            selectedDistrict={selectedDistrict}
-            onDistrictChange={setSelectedDistrict}
-          />
-        </section>
+      {/* Hero Header */}
+      <header className="hero-section">
+        <div className="hero-icon-box">
+          <span className="hero-icon" style={{color: "var(--accent-primary)"}}>🌾</span>
+        </div>
+        <h1 className="hero-title">
+          The Agricultural Intelligence<br/>Dashboard
+        </h1>
+        <p className="hero-subtitle">
+          Revenge for crop uncertainty. Calculate the exact risks of your farming decisions and generate intelligence reports to soothe your soul.
+        </p>
+      </header>
 
-        {/* Right: District map (40%) */}
-        <section className="w-2/5 flex flex-col p-5 bg-gray-50">
-          <h2 className="text-base font-semibold text-gray-700 mb-3">
-            District Map
-            {selectedDistrict && (
-              <span className="ml-2 text-sm font-normal text-green-600">
-                — {selectedDistrict}
-              </span>
-            )}
-          </h2>
-          <div className="flex-1 rounded-lg overflow-hidden shadow border border-gray-200">
-            <DistrictMap
-              selectedDistrict={selectedDistrict}
-              onDistrictClick={setSelectedDistrict}
-            />
-          </div>
-          <p className="text-xs text-gray-400 mt-2 text-center">
-            Click a district pin to auto-select it in the query form.
-          </p>
-        </section>
+      {/* Main Content Component */ }
+      <main className="main-container">
+        <QueryPanel healthStatus={healthStatus} />
       </main>
     </div>
   );

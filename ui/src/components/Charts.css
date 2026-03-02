@@ -1,0 +1,110 @@
+.chart-container {
+  margin-top: 1rem;
+  padding: 1.25rem;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.chart-header h3 {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.chart-meta {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.current-price {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-primary);
+}
+
+.trend-badge.rising { color: var(--risk-low); border-color: rgba(16, 185, 129, 0.3); background: rgba(16, 185, 129, 0.1); }
+.trend-badge.falling { color: var(--risk-high); border-color: rgba(239, 68, 68, 0.3); background: rgba(239, 68, 68, 0.1); }
+.trend-badge.stable { color: var(--risk-medium); border-color: rgba(245, 158, 11, 0.3); background: rgba(245, 158, 11, 0.1); }
+
+.chart-wrapper {
+  margin-top: 0.5rem;
+}
+
+.custom-tooltip {
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  background: var(--bg-surface-elevated);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.tooltip-title {
+  font-weight: 700;
+  font-size: 0.9rem;
+  margin-bottom: 0.25rem;
+}
+
+.tooltip-price {
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.tooltip-severity {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.threat-tags-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.threat-tag {
+  font-size: 0.75rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+.threat-tag.disease {
+  background: rgba(239, 68, 68, 0.15);
+  color: #fca5a5;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.threat-tag.pest {
+  background: rgba(245, 158, 11, 0.15);
+  color: #fcd34d;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.chart-footer {
+  font-size: 0.8rem;
+  padding-top: 0.75rem;
+  border-top: 1px dashed var(--border-light);
+}
+
+.footer-label {
+  color: var(--accent-secondary);
+  font-weight: 600;
+  margin-right: 0.5rem;
+}
+
+.footer-value {
+  color: var(--text-primary);
+}
