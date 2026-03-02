@@ -72,3 +72,4 @@ evaluation/results/**
 !evaluation/results/.gitkeep
 evaluation/qa_pairs/**
 !evaluation/qa_pairs/.gitkeep
+/ui/node_modules

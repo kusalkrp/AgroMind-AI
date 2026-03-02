@@ -210,12 +210,13 @@ def ingest_weather(self, districts: list[str] | None = None, lookback_days: int 
 
 # ── High-level orchestration ─────────────────────────────────────────────────
 
-def ingest_document(filepath: str | Path, strategy: ChunkStrategy = "fixed") -> dict:
+@app.task(name="ingestion.pipeline.ingest_document", bind=True, max_retries=2)
+def ingest_document(self, filepath: str | Path, strategy: ChunkStrategy = "fixed") -> dict:
     """
     Full ingestion chain: extract → tag → chunk → (embed in Phase 2).
 
-    This runs synchronously (outside Celery) for manual/CLI use.
-    For production, dispatch individual Celery tasks instead.
+    Registered as a Celery task so the API layer can dispatch it with
+    `.delay(filepath, strategy)` and track progress via AsyncResult.
 
     Args:
         filepath: Path to the PDF file.

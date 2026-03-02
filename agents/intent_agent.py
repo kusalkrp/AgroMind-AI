@@ -90,6 +90,14 @@ def intent_node(state: AgentState) -> AgentState:
 
     raw_chunks = hybrid_search(query, filters=filters or None, top_k=15)
 
+    # Fallback: metadata tags are sparse in practice — if filters return nothing,
+    # retry without any filter so the vector search can still find relevant docs.
+    if not raw_chunks and filters:
+        logger.warning(
+            f"intent_node: 0 chunks with filters {filters} — retrying without filters"
+        )
+        raw_chunks = hybrid_search(query, filters=None, top_k=15)
+
     # ── Step 3: Rerank ───────────────────────────────────────────────────────
     reranked = rerank_texts(query, raw_chunks, top_k=8)
 
