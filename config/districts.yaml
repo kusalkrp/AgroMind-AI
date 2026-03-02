@@ -1,0 +1,203 @@
+# Sri Lanka — 25 districts with agronomic metadata
+# lat/lon = centroid coordinates
+
+districts:
+  - name: Colombo
+    province: Western
+    agro_zone: Wet Zone
+    rainfall_zone: High
+    lat: 6.9271
+    lon: 79.8612
+    annual_rainfall_mm: 2400
+
+  - name: Gampaha
+    province: Western
+    agro_zone: Wet Zone
+    rainfall_zone: High
+    lat: 7.0917
+    lon: 80.0000
+    annual_rainfall_mm: 2100
+
+  - name: Kalutara
+    province: Western
+    agro_zone: Wet Zone
+    rainfall_zone: High
+    lat: 6.5854
+    lon: 79.9607
+    annual_rainfall_mm: 2800
+
+  - name: Kandy
+    province: Central
+    agro_zone: Mid-country Wet Zone
+    rainfall_zone: High
+    lat: 7.2906
+    lon: 80.6337
+    annual_rainfall_mm: 1900
+
+  - name: Matale
+    province: Central
+    agro_zone: Intermediate Zone
+    rainfall_zone: Medium
+    lat: 7.4675
+    lon: 80.6234
+    annual_rainfall_mm: 1650
+
+  - name: Nuwara Eliya
+    province: Central
+    agro_zone: Upcountry Wet Zone
+    rainfall_zone: Very High
+    lat: 6.9497
+    lon: 80.7891
+    annual_rainfall_mm: 2500
+
+  - name: Galle
+    province: Southern
+    agro_zone: Wet Zone
+    rainfall_zone: High
+    lat: 6.0535
+    lon: 80.2210
+    annual_rainfall_mm: 2400
+
+  - name: Matara
+    province: Southern
+    agro_zone: Wet Zone
+    rainfall_zone: High
+    lat: 5.9549
+    lon: 80.5550
+    annual_rainfall_mm: 2200
+
+  - name: Hambantota
+    province: Southern
+    agro_zone: Dry Zone
+    rainfall_zone: Low
+    lat: 6.1429
+    lon: 81.1212
+    annual_rainfall_mm: 1000
+
+  - name: Jaffna
+    province: Northern
+    agro_zone: Dry Zone
+    rainfall_zone: Low
+    lat: 9.6615
+    lon: 80.0255
+    annual_rainfall_mm: 1000
+
+  - name: Kilinochchi
+    province: Northern
+    agro_zone: Dry Zone
+    rainfall_zone: Low
+    lat: 9.3803
+    lon: 80.3770
+    annual_rainfall_mm: 1100
+
+  - name: Mannar
+    province: Northern
+    agro_zone: Dry Zone
+    rainfall_zone: Low
+    lat: 8.9810
+    lon: 79.9044
+    annual_rainfall_mm: 900
+
+  - name: Vavuniya
+    province: Northern
+    agro_zone: Dry Zone
+    rainfall_zone: Low
+    lat: 8.7514
+    lon: 80.4971
+    annual_rainfall_mm: 1200
+
+  - name: Mullaitivu
+    province: Northern
+    agro_zone: Dry Zone
+    rainfall_zone: Low
+    lat: 9.2671
+    lon: 80.8128
+    annual_rainfall_mm: 1400
+
+  - name: Batticaloa
+    province: Eastern
+    agro_zone: Dry Zone
+    rainfall_zone: Medium
+    lat: 7.7170
+    lon: 81.7003
+    annual_rainfall_mm: 1600
+
+  - name: Ampara
+    province: Eastern
+    agro_zone: Dry Zone
+    rainfall_zone: Low
+    lat: 7.2980
+    lon: 81.6726
+    annual_rainfall_mm: 1700
+
+  - name: Trincomalee
+    province: Eastern
+    agro_zone: Dry Zone
+    rainfall_zone: Low
+    lat: 8.5874
+    lon: 81.2152
+    annual_rainfall_mm: 1600
+
+  - name: Kurunegala
+    province: North Western
+    agro_zone: Intermediate Zone
+    rainfall_zone: Medium
+    lat: 7.4818
+    lon: 80.3609
+    annual_rainfall_mm: 1500
+
+  - name: Puttalam
+    province: North Western
+    agro_zone: Dry Zone
+    rainfall_zone: Low
+    lat: 8.0362
+    lon: 79.8283
+    annual_rainfall_mm: 900
+
+  - name: Anuradhapura
+    province: North Central
+    agro_zone: Dry Zone
+    rainfall_zone: Low
+    lat: 8.3114
+    lon: 80.4037
+    annual_rainfall_mm: 1200
+
+  - name: Polonnaruwa
+    province: North Central
+    agro_zone: Dry Zone
+    rainfall_zone: Low
+    lat: 7.9403
+    lon: 81.0188
+    annual_rainfall_mm: 1400
+
+  - name: Badulla
+    province: Uva
+    agro_zone: Intermediate Zone
+    rainfall_zone: Medium
+    lat: 6.9934
+    lon: 81.0550
+    annual_rainfall_mm: 1800
+
+  - name: Monaragala
+    province: Uva
+    agro_zone: Dry Zone
+    rainfall_zone: Low
+    lat: 6.8728
+    lon: 81.3507
+    annual_rainfall_mm: 1300
+
+  - name: Ratnapura
+    province: Sabaragamuwa
+    agro_zone: Wet Zone
+    rainfall_zone: Very High
+    lat: 6.6828
+    lon: 80.3992
+    annual_rainfall_mm: 3500
+
+  - name: Kegalle
+    province: Sabaragamuwa
+    agro_zone: Wet Zone
+    rainfall_zone: High
+    lat: 7.2513
+    lon: 80.3464
+    annual_rainfall_mm: 2600

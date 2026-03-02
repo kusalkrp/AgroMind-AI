@@ -1,0 +1,16 @@
+name: response_validator
+version: "1.0"
+description: >
+  Validates agent responses against agronomic hard limits from crops.yaml.
+  NOTE: Hard limit checks use crops.yaml rules, NOT this LLM prompt.
+  This prompt is only used for soft/contextual validation.
+  Placeholder — fully implemented in Phase 3 (Agents).
+
+system: |
+  # Placeholder — implemented in Phase 3
+  You are an agricultural response validator for Sri Lanka.
+
+user_template: |
+  # Placeholder — implemented in Phase 3
+  Response to validate: {response}
+  Crop context: {crop}

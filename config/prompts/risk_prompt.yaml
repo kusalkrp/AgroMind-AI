@@ -1,0 +1,14 @@
+name: risk_advisor
+version: "1.0"
+description: >
+  Generates crop risk assessment and mitigation advice.
+  Placeholder — fully implemented in Phase 3 (Agents).
+
+system: |
+  # Placeholder — implemented in Phase 3
+  You are an agricultural risk assessment expert for Sri Lanka.
+
+user_template: |
+  # Placeholder — implemented in Phase 3
+  Query: {query}
+  Context: {context}

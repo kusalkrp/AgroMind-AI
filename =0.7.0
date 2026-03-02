@@ -1,0 +1,352 @@
+Collecting google-generativeai
+  Downloading google_generativeai-0.8.6-py3-none-any.whl.metadata (3.9 kB)
+Collecting llama-index-embeddings-google>=0.1.0
+  Downloading llama_index_embeddings_google-0.4.2-py3-none-any.whl.metadata (717 bytes)
+Collecting google-ai-generativelanguage==0.6.15 (from google-generativeai)
+  Downloading google_ai_generativelanguage-0.6.15-py3-none-any.whl.metadata (5.7 kB)
+Collecting google-api-core (from google-generativeai)
+  Downloading google_api_core-2.30.0-py3-none-any.whl.metadata (3.1 kB)
+Collecting google-api-python-client (from google-generativeai)
+  Downloading google_api_python_client-2.190.0-py3-none-any.whl.metadata (7.0 kB)
+Collecting google-auth>=2.15.0 (from google-generativeai)
+  Downloading google_auth-2.48.0-py3-none-any.whl.metadata (6.2 kB)
+Collecting protobuf (from google-generativeai)
+  Downloading protobuf-7.34.0-cp310-abi3-manylinux2014_x86_64.whl.metadata (595 bytes)
+Collecting pydantic (from google-generativeai)
+  Downloading pydantic-2.12.5-py3-none-any.whl.metadata (90 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 90.6/90.6 kB 1.0 MB/s eta 0:00:00
+Collecting tqdm (from google-generativeai)
+  Downloading tqdm-4.67.3-py3-none-any.whl.metadata (57 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 57.7/57.7 kB 2.1 MB/s eta 0:00:00
+Collecting typing-extensions (from google-generativeai)
+  Downloading typing_extensions-4.15.0-py3-none-any.whl.metadata (3.3 kB)
+Collecting proto-plus<2.0.0dev,>=1.22.3 (from google-ai-generativelanguage==0.6.15->google-generativeai)
+  Downloading proto_plus-1.27.1-py3-none-any.whl.metadata (2.2 kB)
+Collecting protobuf (from google-generativeai)
+  Downloading protobuf-5.29.6-cp38-abi3-manylinux2014_x86_64.whl.metadata (592 bytes)
+Collecting google-generativeai
+  Downloading google_generativeai-0.5.4-py3-none-any.whl.metadata (3.9 kB)
+Collecting llama-index-core<0.15,>=0.13.0 (from llama-index-embeddings-google>=0.1.0)
+  Downloading llama_index_core-0.14.15-py3-none-any.whl.metadata (2.6 kB)
+Collecting google-ai-generativelanguage==0.6.4 (from google-generativeai)
+  Downloading google_ai_generativelanguage-0.6.4-py3-none-any.whl.metadata (5.6 kB)
+Collecting protobuf (from google-generativeai)
+  Downloading protobuf-4.25.8-cp37-abi3-manylinux2014_x86_64.whl.metadata (541 bytes)
+Collecting googleapis-common-protos<2.0.0,>=1.56.3 (from google-api-core->google-generativeai)
+  Downloading googleapis_common_protos-1.72.0-py3-none-any.whl.metadata (9.4 kB)
+Collecting requests<3.0.0,>=2.20.0 (from google-api-core->google-generativeai)
+  Downloading requests-2.32.5-py3-none-any.whl.metadata (4.9 kB)
+Collecting pyasn1-modules>=0.2.1 (from google-auth>=2.15.0->google-generativeai)
+  Downloading pyasn1_modules-0.4.2-py3-none-any.whl.metadata (3.5 kB)
+Collecting cryptography>=38.0.3 (from google-auth>=2.15.0->google-generativeai)
+  Downloading cryptography-46.0.5-cp311-abi3-manylinux_2_34_x86_64.whl.metadata (5.7 kB)
+Collecting rsa<5,>=3.1.4 (from google-auth>=2.15.0->google-generativeai)
+  Downloading rsa-4.9.1-py3-none-any.whl.metadata (5.6 kB)
+Collecting aiohttp<4,>=3.8.6 (from llama-index-core<0.15,>=0.13.0->llama-index-embeddings-google>=0.1.0)
+  Downloading aiohttp-3.13.3-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (8.1 kB)
+Collecting aiosqlite (from llama-index-core<0.15,>=0.13.0->llama-index-embeddings-google>=0.1.0)
+  Downloading aiosqlite-0.22.1-py3-none-any.whl.metadata (4.3 kB)
+Collecting banks<3,>=2.3.0 (from llama-index-core<0.15,>=0.13.0->llama-index-embeddings-google>=0.1.0)
+  Downloading banks-2.4.1-py3-none-any.whl.metadata (12 kB)
+Collecting dataclasses-json (from llama-index-core<0.15,>=0.13.0->llama-index-embeddings-google>=0.1.0)
+  Downloading dataclasses_json-0.6.7-py3-none-any.whl.metadata (25 kB)
+Collecting deprecated>=1.2.9.3 (from llama-index-core<0.15,>=0.13.0->llama-index-embeddings-google>=0.1.0)
+  Downloading deprecated-1.3.1-py2.py3-none-any.whl.metadata (5.9 kB)
+Collecting dirtyjson<2,>=1.0.8 (from llama-index-core<0.15,>=0.13.0->llama-index-embeddings-google>=0.1.0)
+  Downloading dirtyjson-1.0.8-py3-none-any.whl.metadata (11 kB)
+Collecting filetype<2,>=1.2.0 (from llama-index-core<0.15,>=0.13.0->llama-index-embeddings-google>=0.1.0)
+  Downloading filetype-1.2.0-py2.py3-none-any.whl.metadata (6.5 kB)
+Collecting fsspec>=2023.5.0 (from llama-index-core<0.15,>=0.13.0->llama-index-embeddings-google>=0.1.0)
+  Downloading fsspec-2026.2.0-py3-none-any.whl.metadata (10 kB)
+Collecting httpx (from llama-index-core<0.15,>=0.13.0->llama-index-embeddings-google>=0.1.0)
+  Downloading httpx-0.28.1-py3-none-any.whl.metadata (7.1 kB)
+Collecting llama-index-workflows!=2.9.0,<3,>=2 (from llama-index-core<0.15,>=0.13.0->llama-index-embeddings-google>=0.1.0)
+  Downloading llama_index_workflows-2.15.0-py3-none-any.whl.metadata (4.7 kB)
+Collecting nest-asyncio<2,>=1.5.8 (from llama-index-core<0.15,>=0.13.0->llama-index-embeddings-google>=0.1.0)
+  Downloading nest_asyncio-1.6.0-py3-none-any.whl.metadata (2.8 kB)
+Collecting networkx>=3.0 (from llama-index-core<0.15,>=0.13.0->llama-index-embeddings-google>=0.1.0)
+  Downloading networkx-3.6.1-py3-none-any.whl.metadata (6.8 kB)
+Collecting nltk>3.8.1 (from llama-index-core<0.15,>=0.13.0->llama-index-embeddings-google>=0.1.0)
+  Downloading nltk-3.9.3-py3-none-any.whl.metadata (3.2 kB)
+Collecting numpy (from llama-index-core<0.15,>=0.13.0->llama-index-embeddings-google>=0.1.0)
+  Downloading numpy-2.4.2-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (6.6 kB)
+Collecting pillow>=9.0.0 (from llama-index-core<0.15,>=0.13.0->llama-index-embeddings-google>=0.1.0)
+  Downloading pillow-12.1.1-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (8.8 kB)
+Collecting platformdirs (from llama-index-core<0.15,>=0.13.0->llama-index-embeddings-google>=0.1.0)
+  Downloading platformdirs-4.9.2-py3-none-any.whl.metadata (4.7 kB)
+Collecting pyyaml>=6.0.1 (from llama-index-core<0.15,>=0.13.0->llama-index-embeddings-google>=0.1.0)
+  Downloading pyyaml-6.0.3-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.4 kB)
+Collecting setuptools>=80.9.0 (from llama-index-core<0.15,>=0.13.0->llama-index-embeddings-google>=0.1.0)
+  Downloading setuptools-82.0.0-py3-none-any.whl.metadata (6.6 kB)
+Collecting sqlalchemy>=1.4.49 (from sqlalchemy[asyncio]>=1.4.49->llama-index-core<0.15,>=0.13.0->llama-index-embeddings-google>=0.1.0)
+  Downloading sqlalchemy-2.0.47-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (9.5 kB)
+Collecting tenacity!=8.4.0,<10.0.0,>=8.2.0 (from llama-index-core<0.15,>=0.13.0->llama-index-embeddings-google>=0.1.0)
+  Downloading tenacity-9.1.4-py3-none-any.whl.metadata (1.2 kB)
+Collecting tiktoken>=0.7.0 (from llama-index-core<0.15,>=0.13.0->llama-index-embeddings-google>=0.1.0)
+  Downloading tiktoken-0.12.0-cp311-cp311-manylinux_2_28_x86_64.whl.metadata (6.7 kB)
+Collecting tinytag>=2.2.0 (from llama-index-core<0.15,>=0.13.0->llama-index-embeddings-google>=0.1.0)
+  Downloading tinytag-2.2.0-py3-none-any.whl.metadata (19 kB)
+Collecting typing-inspect>=0.8.0 (from llama-index-core<0.15,>=0.13.0->llama-index-embeddings-google>=0.1.0)
+  Downloading typing_inspect-0.9.0-py3-none-any.whl.metadata (1.5 kB)
+Collecting wrapt (from llama-index-core<0.15,>=0.13.0->llama-index-embeddings-google>=0.1.0)
+  Downloading wrapt-2.1.1-cp311-cp311-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl.metadata (7.4 kB)
+Collecting annotated-types>=0.6.0 (from pydantic->google-generativeai)
+  Downloading annotated_types-0.7.0-py3-none-any.whl.metadata (15 kB)
+Collecting pydantic-core==2.41.5 (from pydantic->google-generativeai)
+  Downloading pydantic_core-2.41.5-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (7.3 kB)
+Collecting typing-inspection>=0.4.2 (from pydantic->google-generativeai)
+  Downloading typing_inspection-0.4.2-py3-none-any.whl.metadata (2.6 kB)
+Collecting httplib2<1.0.0,>=0.19.0 (from google-api-python-client->google-generativeai)
+  Downloading httplib2-0.31.2-py3-none-any.whl.metadata (2.2 kB)
+Collecting google-auth-httplib2<1.0.0,>=0.2.0 (from google-api-python-client->google-generativeai)
+  Downloading google_auth_httplib2-0.3.0-py3-none-any.whl.metadata (3.1 kB)
+Collecting uritemplate<5,>=3.0.1 (from google-api-python-client->google-generativeai)
+  Downloading uritemplate-4.2.0-py3-none-any.whl.metadata (2.6 kB)
+Collecting aiohappyeyeballs>=2.5.0 (from aiohttp<4,>=3.8.6->llama-index-core<0.15,>=0.13.0->llama-index-embeddings-google>=0.1.0)
+  Downloading aiohappyeyeballs-2.6.1-py3-none-any.whl.metadata (5.9 kB)
+Collecting aiosignal>=1.4.0 (from aiohttp<4,>=3.8.6->llama-index-core<0.15,>=0.13.0->llama-index-embeddings-google>=0.1.0)
+  Downloading aiosignal-1.4.0-py3-none-any.whl.metadata (3.7 kB)
+Collecting attrs>=17.3.0 (from aiohttp<4,>=3.8.6->llama-index-core<0.15,>=0.13.0->llama-index-embeddings-google>=0.1.0)
+  Downloading attrs-25.4.0-py3-none-any.whl.metadata (10 kB)
+Collecting frozenlist>=1.1.1 (from aiohttp<4,>=3.8.6->llama-index-core<0.15,>=0.13.0->llama-index-embeddings-google>=0.1.0)
+  Downloading frozenlist-1.8.0-cp311-cp311-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl.metadata (20 kB)
+Collecting multidict<7.0,>=4.5 (from aiohttp<4,>=3.8.6->llama-index-core<0.15,>=0.13.0->llama-index-embeddings-google>=0.1.0)
+  Downloading multidict-6.7.1-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (5.3 kB)
+Collecting propcache>=0.2.0 (from aiohttp<4,>=3.8.6->llama-index-core<0.15,>=0.13.0->llama-index-embeddings-google>=0.1.0)
+  Downloading propcache-0.4.1-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (13 kB)
+Collecting yarl<2.0,>=1.17.0 (from aiohttp<4,>=3.8.6->llama-index-core<0.15,>=0.13.0->llama-index-embeddings-google>=0.1.0)
+  Downloading yarl-1.23.0-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (79 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 79.6/79.6 kB 2.2 MB/s eta 0:00:00
+Collecting griffe (from banks<3,>=2.3.0->llama-index-core<0.15,>=0.13.0->llama-index-embeddings-google>=0.1.0)
+  Downloading griffe-2.0.0-py3-none-any.whl.metadata (12 kB)
+Collecting jinja2 (from banks<3,>=2.3.0->llama-index-core<0.15,>=0.13.0->llama-index-embeddings-google>=0.1.0)
+  Downloading jinja2-3.1.6-py3-none-any.whl.metadata (2.9 kB)
+Collecting cffi>=2.0.0 (from cryptography>=38.0.3->google-auth>=2.15.0->google-generativeai)
+  Downloading cffi-2.0.0-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (2.6 kB)
+Collecting grpcio<2.0.0,>=1.33.2 (from google-api-core[grpc]!=2.0.*,!=2.1.*,!=2.10.*,!=2.2.*,!=2.3.*,!=2.4.*,!=2.5.*,!=2.6.*,!=2.7.*,!=2.8.*,!=2.9.*,<3.0.0dev,>=1.34.1->google-ai-generativelanguage==0.6.15->google-generativeai)
+  Downloading grpcio-1.78.0-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (3.8 kB)
+Collecting grpcio-status<2.0.0,>=1.33.2 (from google-api-core[grpc]!=2.0.*,!=2.1.*,!=2.10.*,!=2.2.*,!=2.3.*,!=2.4.*,!=2.5.*,!=2.6.*,!=2.7.*,!=2.8.*,!=2.9.*,<3.0.0dev,>=1.34.1->google-ai-generativelanguage==0.6.15->google-generativeai)
+  Downloading grpcio_status-1.78.0-py3-none-any.whl.metadata (1.3 kB)
+Collecting pyparsing<4,>=3.1 (from httplib2<1.0.0,>=0.19.0->google-api-python-client->google-generativeai)
+  Downloading pyparsing-3.3.2-py3-none-any.whl.metadata (5.8 kB)
+Collecting llama-index-instrumentation>=0.1.0 (from llama-index-workflows!=2.9.0,<3,>=2->llama-index-core<0.15,>=0.13.0->llama-index-embeddings-google>=0.1.0)
+  Downloading llama_index_instrumentation-0.4.2-py3-none-any.whl.metadata (1.1 kB)
+Collecting click (from nltk>3.8.1->llama-index-core<0.15,>=0.13.0->llama-index-embeddings-google>=0.1.0)
+  Downloading click-8.3.1-py3-none-any.whl.metadata (2.6 kB)
+Collecting joblib (from nltk>3.8.1->llama-index-core<0.15,>=0.13.0->llama-index-embeddings-google>=0.1.0)
+  Downloading joblib-1.5.3-py3-none-any.whl.metadata (5.5 kB)
+Collecting regex>=2021.8.3 (from nltk>3.8.1->llama-index-core<0.15,>=0.13.0->llama-index-embeddings-google>=0.1.0)
+  Downloading regex-2026.2.28-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (40 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 40.4/40.4 kB 1.6 MB/s eta 0:00:00
+Collecting pyasn1<0.7.0,>=0.6.1 (from pyasn1-modules>=0.2.1->google-auth>=2.15.0->google-generativeai)
+  Downloading pyasn1-0.6.2-py3-none-any.whl.metadata (8.4 kB)
+Collecting charset_normalizer<4,>=2 (from requests<3.0.0,>=2.20.0->google-api-core->google-generativeai)
+  Downloading charset_normalizer-3.4.4-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (37 kB)
+Collecting idna<4,>=2.5 (from requests<3.0.0,>=2.20.0->google-api-core->google-generativeai)
+  Downloading idna-3.11-py3-none-any.whl.metadata (8.4 kB)
+Collecting urllib3<3,>=1.21.1 (from requests<3.0.0,>=2.20.0->google-api-core->google-generativeai)
+  Downloading urllib3-2.6.3-py3-none-any.whl.metadata (6.9 kB)
+Collecting certifi>=2017.4.17 (from requests<3.0.0,>=2.20.0->google-api-core->google-generativeai)
+  Downloading certifi-2026.2.25-py3-none-any.whl.metadata (2.5 kB)
+Collecting greenlet>=1 (from sqlalchemy>=1.4.49->sqlalchemy[asyncio]>=1.4.49->llama-index-core<0.15,>=0.13.0->llama-index-embeddings-google>=0.1.0)
+  Downloading greenlet-3.3.2-cp311-cp311-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl.metadata (3.7 kB)
+Collecting mypy-extensions>=0.3.0 (from typing-inspect>=0.8.0->llama-index-core<0.15,>=0.13.0->llama-index-embeddings-google>=0.1.0)
+  Downloading mypy_extensions-1.1.0-py3-none-any.whl.metadata (1.1 kB)
+Collecting marshmallow<4.0.0,>=3.18.0 (from dataclasses-json->llama-index-core<0.15,>=0.13.0->llama-index-embeddings-google>=0.1.0)
+  Downloading marshmallow-3.26.2-py3-none-any.whl.metadata (7.3 kB)
+Collecting anyio (from httpx->llama-index-core<0.15,>=0.13.0->llama-index-embeddings-google>=0.1.0)
+  Downloading anyio-4.12.1-py3-none-any.whl.metadata (4.3 kB)
+Collecting httpcore==1.* (from httpx->llama-index-core<0.15,>=0.13.0->llama-index-embeddings-google>=0.1.0)
+  Downloading httpcore-1.0.9-py3-none-any.whl.metadata (21 kB)
+Collecting h11>=0.16 (from httpcore==1.*->httpx->llama-index-core<0.15,>=0.13.0->llama-index-embeddings-google>=0.1.0)
+  Downloading h11-0.16.0-py3-none-any.whl.metadata (8.3 kB)
+Collecting pycparser (from cffi>=2.0.0->cryptography>=38.0.3->google-auth>=2.15.0->google-generativeai)
+  Downloading pycparser-3.0-py3-none-any.whl.metadata (8.2 kB)
+INFO: pip is looking at multiple versions of grpcio-status to determine which version is compatible with other requirements. This could take a while.
+Collecting grpcio-status<2.0.0,>=1.33.2 (from google-api-core[grpc]!=2.0.*,!=2.1.*,!=2.10.*,!=2.2.*,!=2.3.*,!=2.4.*,!=2.5.*,!=2.6.*,!=2.7.*,!=2.8.*,!=2.9.*,<3.0.0dev,>=1.34.1->google-ai-generativelanguage==0.6.15->google-generativeai)
+  Downloading grpcio_status-1.76.0-py3-none-any.whl.metadata (1.1 kB)
+  Downloading grpcio_status-1.75.1-py3-none-any.whl.metadata (1.1 kB)
+  Downloading grpcio_status-1.75.0-py3-none-any.whl.metadata (1.1 kB)
+  Downloading grpcio_status-1.74.0-py3-none-any.whl.metadata (1.1 kB)
+  Downloading grpcio_status-1.73.1-py3-none-any.whl.metadata (1.1 kB)
+  Downloading grpcio_status-1.73.0-py3-none-any.whl.metadata (1.1 kB)
+  Downloading grpcio_status-1.72.2-py3-none-any.whl.metadata (1.1 kB)
+INFO: pip is still looking at multiple versions of grpcio-status to determine which version is compatible with other requirements. This could take a while.
+  Downloading grpcio_status-1.72.1-py3-none-any.whl.metadata (1.1 kB)
+  Downloading grpcio_status-1.71.2-py3-none-any.whl.metadata (1.1 kB)
+  Downloading grpcio_status-1.71.0-py3-none-any.whl.metadata (1.1 kB)
+  Downloading grpcio_status-1.70.0-py3-none-any.whl.metadata (1.1 kB)
+  Downloading grpcio_status-1.69.0-py3-none-any.whl.metadata (1.1 kB)
+INFO: This is taking longer than usual. You might need to provide the dependency resolver with stricter constraints to reduce runtime. See https://pip.pypa.io/warnings/backtracking for guidance. If you want to abort this run, press Ctrl + C.
+  Downloading grpcio_status-1.68.1-py3-none-any.whl.metadata (1.1 kB)
+  Downloading grpcio_status-1.68.0-py3-none-any.whl.metadata (1.1 kB)
+  Downloading grpcio_status-1.67.1-py3-none-any.whl.metadata (1.1 kB)
+  Downloading grpcio_status-1.67.0-py3-none-any.whl.metadata (1.1 kB)
+  Downloading grpcio_status-1.66.2-py3-none-any.whl.metadata (1.1 kB)
+  Downloading grpcio_status-1.66.1-py3-none-any.whl.metadata (1.1 kB)
+  Downloading grpcio_status-1.66.0-py3-none-any.whl.metadata (1.1 kB)
+  Downloading grpcio_status-1.65.5-py3-none-any.whl.metadata (1.1 kB)
+  Downloading grpcio_status-1.65.4-py3-none-any.whl.metadata (1.1 kB)
+  Downloading grpcio_status-1.65.2-py3-none-any.whl.metadata (1.1 kB)
+  Downloading grpcio_status-1.65.1-py3-none-any.whl.metadata (1.1 kB)
+  Downloading grpcio_status-1.64.3-py3-none-any.whl.metadata (1.1 kB)
+  Downloading grpcio_status-1.64.1-py3-none-any.whl.metadata (1.1 kB)
+  Downloading grpcio_status-1.64.0-py3-none-any.whl.metadata (1.1 kB)
+  Downloading grpcio_status-1.63.2-py3-none-any.whl.metadata (1.1 kB)
+  Downloading grpcio_status-1.63.0-py3-none-any.whl.metadata (1.1 kB)
+  Downloading grpcio_status-1.62.3-py3-none-any.whl.metadata (1.3 kB)
+Collecting packaging>=17.0 (from marshmallow<4.0.0,>=3.18.0->dataclasses-json->llama-index-core<0.15,>=0.13.0->llama-index-embeddings-google>=0.1.0)
+  Downloading packaging-26.0-py3-none-any.whl.metadata (3.3 kB)
+Collecting griffecli==2.0.0 (from griffe->banks<3,>=2.3.0->llama-index-core<0.15,>=0.13.0->llama-index-embeddings-google>=0.1.0)
+  Downloading griffecli-2.0.0-py3-none-any.whl.metadata (1.2 kB)
+Collecting griffelib==2.0.0 (from griffe->banks<3,>=2.3.0->llama-index-core<0.15,>=0.13.0->llama-index-embeddings-google>=0.1.0)
+  Downloading griffelib-2.0.0-py3-none-any.whl.metadata (1.3 kB)
+Collecting colorama>=0.4 (from griffecli==2.0.0->griffe->banks<3,>=2.3.0->llama-index-core<0.15,>=0.13.0->llama-index-embeddings-google>=0.1.0)
+  Downloading colorama-0.4.6-py2.py3-none-any.whl.metadata (17 kB)
+Collecting MarkupSafe>=2.0 (from jinja2->banks<3,>=2.3.0->llama-index-core<0.15,>=0.13.0->llama-index-embeddings-google>=0.1.0)
+  Downloading markupsafe-3.0.3-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.7 kB)
+Downloading llama_index_embeddings_google-0.4.2-py3-none-any.whl (6.1 kB)
+Downloading google_generativeai-0.5.4-py3-none-any.whl (150 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 150.7/150.7 kB 3.9 MB/s eta 0:00:00
+Downloading google_ai_generativelanguage-0.6.4-py3-none-any.whl (679 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 679.1/679.1 kB 7.6 MB/s eta 0:00:00
+Downloading google_api_core-2.30.0-py3-none-any.whl (173 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 173.3/173.3 kB 7.8 MB/s eta 0:00:00
+Downloading google_auth-2.48.0-py3-none-any.whl (236 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 236.5/236.5 kB 10.5 MB/s eta 0:00:00
+Downloading llama_index_core-0.14.15-py3-none-any.whl (11.9 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 11.9/11.9 MB 20.9 MB/s eta 0:00:00
+Downloading protobuf-4.25.8-cp37-abi3-manylinux2014_x86_64.whl (294 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 294.9/294.9 kB 12.4 MB/s eta 0:00:00
+Downloading pydantic-2.12.5-py3-none-any.whl (463 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 463.6/463.6 kB 14.7 MB/s eta 0:00:00
+Downloading pydantic_core-2.41.5-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (2.1 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.1/2.1 MB 21.6 MB/s eta 0:00:00
+Downloading tqdm-4.67.3-py3-none-any.whl (78 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 78.4/78.4 kB 3.3 MB/s eta 0:00:00
+Downloading typing_extensions-4.15.0-py3-none-any.whl (44 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 44.6/44.6 kB 1.8 MB/s eta 0:00:00
+Downloading google_api_python_client-2.190.0-py3-none-any.whl (14.7 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 14.7/14.7 MB 21.8 MB/s eta 0:00:00
+Downloading aiohttp-3.13.3-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (1.7 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.7/1.7 MB 24.9 MB/s eta 0:00:00
+Downloading annotated_types-0.7.0-py3-none-any.whl (13 kB)
+Downloading banks-2.4.1-py3-none-any.whl (35 kB)
+Downloading cryptography-46.0.5-cp311-abi3-manylinux_2_34_x86_64.whl (4.5 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.5/4.5 MB 21.4 MB/s eta 0:00:00
+Downloading deprecated-1.3.1-py2.py3-none-any.whl (11 kB)
+Downloading dirtyjson-1.0.8-py3-none-any.whl (25 kB)
+Downloading filetype-1.2.0-py2.py3-none-any.whl (19 kB)
+Downloading fsspec-2026.2.0-py3-none-any.whl (202 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 202.5/202.5 kB 7.8 MB/s eta 0:00:00
+Downloading google_auth_httplib2-0.3.0-py3-none-any.whl (9.5 kB)
+Downloading googleapis_common_protos-1.72.0-py3-none-any.whl (297 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 297.5/297.5 kB 10.6 MB/s eta 0:00:00
+Downloading httplib2-0.31.2-py3-none-any.whl (91 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 91.1/91.1 kB 3.8 MB/s eta 0:00:00
+Downloading llama_index_workflows-2.15.0-py3-none-any.whl (104 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 104.4/104.4 kB 4.9 MB/s eta 0:00:00
+Downloading nest_asyncio-1.6.0-py3-none-any.whl (5.2 kB)
+Downloading networkx-3.6.1-py3-none-any.whl (2.1 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.1/2.1 MB 23.8 MB/s eta 0:00:00
+Downloading nltk-3.9.3-py3-none-any.whl (1.5 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.5/1.5 MB 17.6 MB/s eta 0:00:00
+Downloading pillow-12.1.1-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (7.0 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 7.0/7.0 MB 20.3 MB/s eta 0:00:00
+Downloading proto_plus-1.27.1-py3-none-any.whl (50 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 50.5/50.5 kB 2.9 MB/s eta 0:00:00
+Downloading pyasn1_modules-0.4.2-py3-none-any.whl (181 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 181.3/181.3 kB 9.2 MB/s eta 0:00:00
+Downloading pyyaml-6.0.3-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (806 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 806.6/806.6 kB 18.3 MB/s eta 0:00:00
+Downloading requests-2.32.5-py3-none-any.whl (64 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 64.7/64.7 kB 3.1 MB/s eta 0:00:00
+Downloading rsa-4.9.1-py3-none-any.whl (34 kB)
+Downloading setuptools-82.0.0-py3-none-any.whl (1.0 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.0/1.0 MB 16.1 MB/s eta 0:00:00
+Downloading sqlalchemy-2.0.47-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (3.3 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.3/3.3 MB 24.2 MB/s eta 0:00:00
+Downloading tenacity-9.1.4-py3-none-any.whl (28 kB)
+Downloading tiktoken-0.12.0-cp311-cp311-manylinux_2_28_x86_64.whl (1.2 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.2/1.2 MB 19.5 MB/s eta 0:00:00
+Downloading tinytag-2.2.0-py3-none-any.whl (32 kB)
+Downloading typing_inspect-0.9.0-py3-none-any.whl (8.8 kB)
+Downloading typing_inspection-0.4.2-py3-none-any.whl (14 kB)
+Downloading uritemplate-4.2.0-py3-none-any.whl (11 kB)
+Downloading wrapt-2.1.1-cp311-cp311-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl (113 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 113.9/113.9 kB 5.3 MB/s eta 0:00:00
+Downloading aiosqlite-0.22.1-py3-none-any.whl (17 kB)
+Downloading dataclasses_json-0.6.7-py3-none-any.whl (28 kB)
+Downloading httpx-0.28.1-py3-none-any.whl (73 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 73.5/73.5 kB 2.9 MB/s eta 0:00:00
+Downloading httpcore-1.0.9-py3-none-any.whl (78 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 78.8/78.8 kB 3.9 MB/s eta 0:00:00
+Downloading numpy-2.4.2-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (16.9 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 16.9/16.9 MB 19.7 MB/s eta 0:00:00
+Downloading platformdirs-4.9.2-py3-none-any.whl (21 kB)
+Downloading aiohappyeyeballs-2.6.1-py3-none-any.whl (15 kB)
+Downloading aiosignal-1.4.0-py3-none-any.whl (7.5 kB)
+Downloading attrs-25.4.0-py3-none-any.whl (67 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 67.6/67.6 kB 3.7 MB/s eta 0:00:00
+Downloading certifi-2026.2.25-py3-none-any.whl (153 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 153.7/153.7 kB 6.9 MB/s eta 0:00:00
+Downloading cffi-2.0.0-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (215 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 215.6/215.6 kB 8.1 MB/s eta 0:00:00
+Downloading charset_normalizer-3.4.4-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (151 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 151.6/151.6 kB 6.7 MB/s eta 0:00:00
+Downloading frozenlist-1.8.0-cp311-cp311-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl (231 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 231.1/231.1 kB 10.2 MB/s eta 0:00:00
+Downloading greenlet-3.3.2-cp311-cp311-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl (594 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 594.2/594.2 kB 16.0 MB/s eta 0:00:00
+Downloading grpcio-1.78.0-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (6.7 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 6.7/6.7 MB 24.5 MB/s eta 0:00:00
+Downloading grpcio_status-1.62.3-py3-none-any.whl (14 kB)
+Downloading idna-3.11-py3-none-any.whl (71 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 71.0/71.0 kB 2.9 MB/s eta 0:00:00
+Downloading llama_index_instrumentation-0.4.2-py3-none-any.whl (15 kB)
+Downloading marshmallow-3.26.2-py3-none-any.whl (50 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 51.0/51.0 kB 2.2 MB/s eta 0:00:00
+Downloading multidict-6.7.1-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (246 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 246.3/246.3 kB 8.8 MB/s eta 0:00:00
+Downloading mypy_extensions-1.1.0-py3-none-any.whl (5.0 kB)
+Downloading propcache-0.4.1-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (210 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 210.0/210.0 kB 10.2 MB/s eta 0:00:00
+Downloading pyasn1-0.6.2-py3-none-any.whl (83 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 83.4/83.4 kB 4.2 MB/s eta 0:00:00
+Downloading pyparsing-3.3.2-py3-none-any.whl (122 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 122.8/122.8 kB 5.4 MB/s eta 0:00:00
+Downloading regex-2026.2.28-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (800 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 800.2/800.2 kB 19.4 MB/s eta 0:00:00
+Downloading urllib3-2.6.3-py3-none-any.whl (131 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 131.6/131.6 kB 5.8 MB/s eta 0:00:00
+Downloading yarl-1.23.0-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (102 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 102.7/102.7 kB 4.9 MB/s eta 0:00:00
+Downloading anyio-4.12.1-py3-none-any.whl (113 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 113.6/113.6 kB 5.3 MB/s eta 0:00:00
+Downloading click-8.3.1-py3-none-any.whl (108 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 108.3/108.3 kB 5.3 MB/s eta 0:00:00
+Downloading griffe-2.0.0-py3-none-any.whl (5.2 kB)
+Downloading griffecli-2.0.0-py3-none-any.whl (9.3 kB)
+Downloading griffelib-2.0.0-py3-none-any.whl (142 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 142.0/142.0 kB 6.1 MB/s eta 0:00:00
+Downloading jinja2-3.1.6-py3-none-any.whl (134 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 134.9/134.9 kB 6.5 MB/s eta 0:00:00
+Downloading joblib-1.5.3-py3-none-any.whl (309 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 309.1/309.1 kB 11.8 MB/s eta 0:00:00
+Downloading h11-0.16.0-py3-none-any.whl (37 kB)
+Downloading markupsafe-3.0.3-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (22 kB)
+Downloading packaging-26.0-py3-none-any.whl (74 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 74.4/74.4 kB 3.9 MB/s eta 0:00:00
+Downloading pycparser-3.0-py3-none-any.whl (48 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 48.2/48.2 kB 2.5 MB/s eta 0:00:00
+Downloading colorama-0.4.6-py2.py3-none-any.whl (25 kB)
+Installing collected packages: filetype, dirtyjson, wrapt, urllib3, uritemplate, typing-extensions, tqdm, tinytag, tenacity, setuptools, regex, pyyaml, pyparsing, pycparser, pyasn1, protobuf, propcache, platformdirs, pillow, packaging, numpy, networkx, nest-asyncio, mypy-extensions, multidict, MarkupSafe, joblib, idna, h11, griffelib, greenlet, fsspec, frozenlist, colorama, click, charset_normalizer, certifi, attrs, annotated-types, aiosqlite, aiohappyeyeballs, yarl, typing-inspection, typing-inspect, sqlalchemy, rsa, requests, pydantic-core, pyasn1-modules, proto-plus, nltk, marshmallow, jinja2, httplib2, httpcore, grpcio, griffecli, googleapis-common-protos, deprecated, cffi, anyio, aiosignal, tiktoken, pydantic, httpx, grpcio-status, griffe, dataclasses-json, cryptography, aiohttp, llama-index-instrumentation, google-auth, banks, llama-index-workflows, google-auth-httplib2, google-api-core, llama-index-core, google-api-python-client, google-ai-generativelanguage, google-generativeai, llama-index-embeddings-google
+  Attempting uninstall: setuptools
+    Found existing installation: setuptools 79.0.1
+    Uninstalling setuptools-79.0.1:
+      Successfully uninstalled setuptools-79.0.1
+Successfully installed MarkupSafe-3.0.3 aiohappyeyeballs-2.6.1 aiohttp-3.13.3 aiosignal-1.4.0 aiosqlite-0.22.1 annotated-types-0.7.0 anyio-4.12.1 attrs-25.4.0 banks-2.4.1 certifi-2026.2.25 cffi-2.0.0 charset_normalizer-3.4.4 click-8.3.1 colorama-0.4.6 cryptography-46.0.5 dataclasses-json-0.6.7 deprecated-1.3.1 dirtyjson-1.0.8 filetype-1.2.0 frozenlist-1.8.0 fsspec-2026.2.0 google-ai-generativelanguage-0.6.4 google-api-core-2.30.0 google-api-python-client-2.190.0 google-auth-2.48.0 google-auth-httplib2-0.3.0 google-generativeai-0.5.4 googleapis-common-protos-1.72.0 greenlet-3.3.2 griffe-2.0.0 griffecli-2.0.0 griffelib-2.0.0 grpcio-1.78.0 grpcio-status-1.62.3 h11-0.16.0 httpcore-1.0.9 httplib2-0.31.2 httpx-0.28.1 idna-3.11 jinja2-3.1.6 joblib-1.5.3 llama-index-core-0.14.15 llama-index-embeddings-google-0.4.2 llama-index-instrumentation-0.4.2 llama-index-workflows-2.15.0 marshmallow-3.26.2 multidict-6.7.1 mypy-extensions-1.1.0 nest-asyncio-1.6.0 networkx-3.6.1 nltk-3.9.3 numpy-2.4.2 packaging-26.0 pillow-12.1.1 platformdirs-4.9.2 propcache-0.4.1 proto-plus-1.27.1 protobuf-4.25.8 pyasn1-0.6.2 pyasn1-modules-0.4.2 pycparser-3.0 pydantic-2.12.5 pydantic-core-2.41.5 pyparsing-3.3.2 pyyaml-6.0.3 regex-2026.2.28 requests-2.32.5 rsa-4.9.1 setuptools-82.0.0 sqlalchemy-2.0.47 tenacity-9.1.4 tiktoken-0.12.0 tinytag-2.2.0 tqdm-4.67.3 typing-extensions-4.15.0 typing-inspect-0.9.0 typing-inspection-0.4.2 uritemplate-4.2.0 urllib3-2.6.3 wrapt-2.1.1 yarl-1.23.0
+WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+
+[notice] A new release of pip is available: 24.0 -> 26.0.1
+[notice] To update, run: pip install --upgrade pip

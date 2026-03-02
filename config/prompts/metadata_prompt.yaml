@@ -1,0 +1,60 @@
+name: metadata_tagger
+version: "1.0"
+description: >
+  Extracts structured agronomic metadata from a document chunk using Gemini.
+  Returns a JSON object with standardised fields.
+
+system: |
+  You are an agricultural metadata extraction specialist for Sri Lankan farming documents.
+  Always respond with valid JSON only — no markdown fences, no extra text.
+
+user_template: |
+  Extract metadata from the following agricultural document excerpt.
+
+  Document text:
+  ---
+  {text}
+  ---
+
+  Return a JSON object with exactly these fields:
+  {{
+    "crop_types": ["list of crop names mentioned, lowercase, e.g. paddy, tomato, coconut, tea, rubber"],
+    "districts": ["list of Sri Lanka district names mentioned"],
+    "document_type": "one of: advisory, market_price, weather_report, research_paper, policy, extension_guide, unknown",
+    "season_relevance": ["list of seasons: Maha, Yala, Off-season, Year-round"],
+    "source": "inferred source domain or institution name, or empty string",
+    "language": "one of: english, sinhala, tamil, mixed",
+    "confidence": 0.0
+  }}
+
+  Rules:
+  - crop_types must only contain crops from the Sri Lanka major crops list
+  - districts must only contain valid Sri Lanka district names
+  - confidence is a float 0.0–1.0 reflecting your certainty in the extraction
+  - If a field cannot be determined, use an empty list [] or empty string ""
+
+output_schema:
+  type: object
+  required: [crop_types, districts, document_type, season_relevance, source, language, confidence]
+  properties:
+    crop_types:
+      type: array
+      items: { type: string }
+    districts:
+      type: array
+      items: { type: string }
+    document_type:
+      type: string
+      enum: [advisory, market_price, weather_report, research_paper, policy, extension_guide, unknown]
+    season_relevance:
+      type: array
+      items: { type: string }
+    source:
+      type: string
+    language:
+      type: string
+      enum: [english, sinhala, tamil, mixed]
+    confidence:
+      type: number
+      minimum: 0.0
+      maximum: 1.0
