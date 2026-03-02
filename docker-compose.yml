@@ -1,0 +1,185 @@
+version: "3.9"
+
+# Shared env + build config for all Python app services
+x-app-common: &app-common
+  build:
+    context: .
+    dockerfile: Dockerfile
+  env_file: .env
+  volumes:
+    # Mount source so code changes are picked up without rebuilding
+    - .:/app
+    # Persist downloaded Playwright browsers across rebuilds
+    - playwright_browsers:/root/.cache/ms-playwright
+  restart: unless-stopped
+  depends_on:
+    timescaledb:
+      condition: service_healthy
+    redis:
+      condition: service_healthy
+    qdrant:
+      condition: service_healthy
+
+services:
+
+  # ── Qdrant vector store ───────────────────────────────────────────────────
+  qdrant:
+    image: qdrant/qdrant:v1.13.6
+    container_name: agromind_qdrant
+    ports:
+      - "6333:6333"
+      - "6334:6334"
+    volumes:
+      - qdrant_data:/qdrant/storage
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "bash -c '</dev/tcp/localhost/6333' 2>/dev/null && exit 0 || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ── TimescaleDB (PostgreSQL + Timescale, community image) ─────────────────
+  timescaledb:
+    image: timescale/timescaledb:latest-pg16
+    container_name: agromind_timescaledb
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-agromind}
+      POSTGRES_USER: ${POSTGRES_USER:-agromind}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-agromind_secret}
+      POSTGRES_HOST_AUTH_METHOD: md5
+    ports:
+      - "5432:5432"
+    volumes:
+      - timescale_data:/var/lib/postgresql/data
+      - ./scripts/init_db.sql:/docker-entrypoint-initdb.d/init_db.sql
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-agromind}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ── Redis Stack (Celery broker + CAG cache + RedisJSON for LangGraph) ────
+  redis:
+    image: redis/redis-stack-server:7.2.0-v10
+    container_name: agromind_redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ── FastAPI application ────────────────────────────────────────────────────
+  api:
+    <<: *app-common
+    container_name: agromind_api
+    command: uvicorn api.main:app --host 0.0.0.0 --port 8000 --reload
+    ports:
+      - "8000:8000"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+
+  # ── Celery worker ─────────────────────────────────────────────────────────
+  worker:
+    <<: *app-common
+    container_name: agromind_worker
+    command: celery -A ingestion.pipeline worker --loglevel=info --concurrency=2
+    # No ports — internal only
+
+  # ── Celery Beat scheduler ─────────────────────────────────────────────────
+  beat:
+    <<: *app-common
+    container_name: agromind_beat
+    command: celery -A ingestion.pipeline beat --loglevel=info --scheduler celery.beat:PersistentScheduler
+    volumes:
+      - .:/app
+      - celery_beat_data:/var/run/celerybeat  # persist schedule state
+    # Only one Beat instance should ever run
+    deploy:
+      replicas: 1
+
+  # ── MLflow tracking server ────────────────────────────────────────────────
+  mlflow:
+    image: python:3.11-slim
+    container_name: agromind_mlflow
+    ports:
+      - "5000:5000"
+    volumes:
+      - mlflow_data:/mlflow
+    command: >
+      sh -c "pip install mlflow psycopg2-binary --quiet &&
+             mlflow server
+               --host 0.0.0.0
+               --port 5000
+               --backend-store-uri /mlflow
+               --default-artifact-root /mlflow/artifacts"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+
+  # ── Prometheus ────────────────────────────────────────────────────────────
+  prometheus:
+    image: prom/prometheus:v2.52.0
+    container_name: agromind_prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus_data:/prometheus
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+      - "--storage.tsdb.path=/prometheus"
+      - "--web.enable-lifecycle"
+    depends_on:
+      - api
+    restart: unless-stopped
+
+  # ── Grafana ───────────────────────────────────────────────────────────────
+  grafana:
+    image: grafana/grafana:10.4.3
+    container_name: agromind_grafana
+    ports:
+      - "3000:3000"
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD: admin
+      GF_USERS_ALLOW_SIGN_UP: "false"
+    volumes:
+      - grafana_data:/var/lib/grafana
+    depends_on:
+      - prometheus
+    restart: unless-stopped
+
+  # ── React dashboard (Vite dev server) ────────────────────────────────────
+  ui:
+    image: node:20-alpine
+    container_name: agromind_ui
+    working_dir: /app
+    command: sh -c "npm install && npm run dev -- --host"
+    volumes:
+      - ./ui:/app
+    ports:
+      - "5173:5173"
+    depends_on:
+      - api
+    restart: unless-stopped
+
+volumes:
+  qdrant_data:
+  timescale_data:
+  redis_data:
+  mlflow_data:
+  prometheus_data:
+  grafana_data:
+  playwright_browsers:
+  celery_beat_data:

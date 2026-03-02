@@ -1,0 +1,62 @@
+# ── LLM ─────────────────────────────────────────────────────────────────────
+google-generativeai  # version resolved by llama-index-embeddings-google (old SDK kept for llama-index)
+google-genai>=1.0.0  # new unified SDK — used by our embedder, tagger, and langchain-google-genai
+
+# ── RAG / Vector ─────────────────────────────────────────────────────────────
+qdrant-client==1.17.0
+grpcio==1.62.3       # pin: grpcio 1.67+ breaks qdrant-client EnumTypeWrapper | None annotations
+grpcio-status==1.62.3
+llama-index>=0.10.0
+llama-index-embeddings-google>=0.1.0
+llama-index-llms-gemini>=0.1.0
+
+# ── Ingestion ────────────────────────────────────────────────────────────────
+playwright>=1.44.0
+PyMuPDF>=1.24.0
+# paddleocr>=2.7.0      # optional OCR fallback — install separately when needed
+# paddlepaddle>=2.6.0   # optional OCR fallback — install separately when needed
+httpx>=0.27.0
+beautifulsoup4>=4.12.0
+lxml>=5.2.0
+
+# ── Agents / Orchestration ────────────────────────────────────────────────────
+langgraph>=0.2.0
+langgraph-checkpoint-redis>=0.1.0
+langchain>=0.2.0
+langchain-google-genai>=1.0.0
+# mem0ai>=0.0.20   # Phase 3 — install when agents are built
+
+# ── Backend ──────────────────────────────────────────────────────────────────
+fastapi>=0.111.0
+uvicorn[standard]>=0.30.0
+pydantic>=2.7.0
+pydantic-settings>=2.0.0
+celery[redis]>=5.4.0
+python-multipart>=0.0.9
+
+# ── Databases ─────────────────────────────────────────────────────────────────
+psycopg2-binary>=2.9.0
+sqlalchemy>=2.0.0
+redis>=5.0.0
+
+# ── ML / Evaluation ───────────────────────────────────────────────────────────
+# sentence-transformers>=3.0.0  # Phase 2 reranker — pulls PyTorch, install when needed
+# ragas>=0.1.0                   # Phase 2 evaluation — pulls PyTorch, install when needed
+mlflow>=2.13.0
+# langsmith>=0.1.0   # Phase 2 evaluation — install when needed
+# datasets>=2.19.0   # Phase 2 evaluation — install when needed
+
+# ── Monitoring ────────────────────────────────────────────────────────────────
+prometheus-client>=0.20.0
+loguru>=0.7.0
+
+# ── Utilities ─────────────────────────────────────────────────────────────────
+pyyaml>=6.0.0
+python-dotenv>=1.0.0
+tenacity>=8.3.0
+aiofiles>=23.2.0
+
+# ── Dev / Testing ─────────────────────────────────────────────────────────────
+pytest>=8.0.0
+pytest-asyncio>=0.23.0
+pytest-mock>=3.14.0

@@ -1,0 +1,14 @@
+name: crop_planner
+version: "1.0"
+description: >
+  Generates seasonal crop planning recommendations.
+  Placeholder — fully implemented in Phase 3 (Agents).
+
+system: |
+  # Placeholder — implemented in Phase 3
+  You are a seasonal crop planning specialist for Sri Lanka.
+
+user_template: |
+  # Placeholder — implemented in Phase 3
+  Query: {query}
+  Context: {context}

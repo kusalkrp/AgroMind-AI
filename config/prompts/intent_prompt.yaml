@@ -1,0 +1,13 @@
+name: intent_classifier
+version: "1.0"
+description: >
+  Classifies user query intent and extracts structured parameters.
+  Placeholder — fully implemented in Phase 3 (Agents).
+
+system: |
+  # Placeholder — implemented in Phase 3
+  You are an agricultural query intent classifier for Sri Lanka.
+
+user_template: |
+  # Placeholder — implemented in Phase 3
+  Query: {query}

@@ -1,0 +1,92 @@
+# Sri Lanka crop agronomic constraints
+# Used by ValidationAgent for hard-limit checks (NOT LLM judgment)
+
+paddy:
+  name: "Paddy (Rice)"
+  sinhala: "වී"
+  tamil: "நெல்"
+  max_nitrogen_kg_ha: 120
+  ph_range: [5.5, 7.0]
+  water_requirement_mm: [1200, 2000]
+  temperature_range_c: [22, 32]
+  suitable_seasons: ["Maha", "Yala"]
+  planting_windows:
+    Maha: { start_month: 10, end_month: 12 }
+    Yala: { start_month: 4, end_month: 5 }
+  varieties:
+    improved: ["AT 362", "BG 360", "BG 379", "BG 403", "Bg 94-1"]
+    traditional: ["Suwandel", "Pachchaperumal", "Kuruluthuda"]
+  suitable_agro_zones: ["Wet Zone", "Intermediate Zone", "Dry Zone"]
+  soil_types: ["Clay", "Clay Loam", "Silt Loam"]
+  pest_alerts: ["Brown Plant Hopper", "Blast", "Sheath Blight"]
+
+tomato:
+  name: "Tomato"
+  sinhala: "තක්කාලි"
+  tamil: "தக்காளி"
+  max_nitrogen_kg_ha: 150
+  ph_range: [6.0, 7.0]
+  water_requirement_mm: [400, 600]
+  temperature_range_c: [20, 28]
+  suitable_seasons: ["Yala", "Off-season"]
+  planting_windows:
+    Yala: { start_month: 4, end_month: 6 }
+    Off-season: { start_month: 1, end_month: 2 }
+  varieties:
+    improved: ["T-245", "Thilina", "Rajitha", "Lanka Cherry"]
+  suitable_agro_zones: ["Intermediate Zone", "Upcountry Wet Zone"]
+  soil_types: ["Sandy Loam", "Loam", "Clay Loam"]
+  pest_alerts: ["Tomato Leafminer", "Early Blight", "Late Blight", "Root-knot Nematode"]
+
+coconut:
+  name: "Coconut"
+  sinhala: "පොල්"
+  tamil: "தேங்காய்"
+  max_nitrogen_kg_ha: 50
+  ph_range: [5.5, 8.0]
+  water_requirement_mm: [1300, 2300]
+  temperature_range_c: [20, 35]
+  suitable_seasons: ["Year-round"]
+  planting_windows:
+    Year-round: { start_month: 1, end_month: 12 }
+  varieties:
+    improved: ["CRISL Green Dwarf", "CRISL Orange Dwarf", "King Coconut", "Tall × Dwarf"]
+    traditional: ["Sri Lanka Tall"]
+  suitable_agro_zones: ["Wet Zone", "Intermediate Zone"]
+  soil_types: ["Sandy", "Sandy Loam", "Laterite"]
+  pest_alerts: ["Coconut Mite", "Root Wilt", "Bud Rot", "Rhinoceros Beetle"]
+
+tea:
+  name: "Tea"
+  sinhala: "තේ"
+  tamil: "தேயிலை"
+  max_nitrogen_kg_ha: 200
+  ph_range: [4.5, 5.8]
+  water_requirement_mm: [1500, 2500]
+  temperature_range_c: [14, 25]
+  suitable_seasons: ["Year-round"]
+  planting_windows:
+    Year-round: { start_month: 1, end_month: 12 }
+  elevation_range_m: [600, 2100]
+  varieties:
+    improved: ["TRI 2043", "TRI 2025", "TRI 4042", "DT1"]
+  suitable_agro_zones: ["Upcountry Wet Zone", "Mid-country Wet Zone"]
+  soil_types: ["Red-Yellow Podzolic", "Reddish Brown Latosol"]
+  pest_alerts: ["Looper Caterpillar", "Thrips", "Blister Blight", "Grey Blight"]
+
+rubber:
+  name: "Rubber"
+  sinhala: "රබර්"
+  tamil: "இரப்பர்"
+  max_nitrogen_kg_ha: 100
+  ph_range: [4.5, 6.5]
+  water_requirement_mm: [1800, 2500]
+  temperature_range_c: [25, 34]
+  suitable_seasons: ["Year-round"]
+  planting_windows:
+    Year-round: { start_month: 1, end_month: 12 }
+  varieties:
+    improved: ["RRIC 100", "RRIC 102", "RRIC 103", "RRIC 121"]
+  suitable_agro_zones: ["Wet Zone", "Intermediate Zone"]
+  soil_types: ["Red-Yellow Podzolic", "Reddish Brown Latosol"]
+  pest_alerts: ["Oidium Leaf Disease", "Phytophthora Leaf Fall", "Pink Disease"]

@@ -1,0 +1,25 @@
+Disease & Pest Risk (disease)
+  - "What diseases should I watch for in paddy this Maha season in Kandy?"
+  - "My maize leaves have brown spots — what pest or disease is this?"
+  - "Is there a blast risk for rice in colombo right now?"
+
+  Crop Planning (planning)
+  - "What fertilizer should I use for paddy in Kandy?"
+  - "Which paddy variety is best for Polonnaruwa in the Yala season?"
+  - "Give me a full planting schedule for maize in Kurunegala."
+  - "How much urea per hectare for tea in Badulla?"
+
+  Market & Prices (market)
+  - "What is the current paddy price in Dambulla?"
+  - "When is the best time to sell my coconut harvest?"
+  - "Is the rubber price rising or falling this month?"
+  - "How much profit can I expect per hectare of paddy?"
+
+  Government Policy & Subsidies (policy)
+  - "What fertilizer subsidies are available for paddy farmers?"
+  - "How do I apply for crop insurance?"
+  - "What government schemes can I get for small-scale tea farming?"
+  - "Are there any loans for maize cultivation in Jaffna?"
+
+  General
+  - Anything else agricultural that doesn't fit the above
